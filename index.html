@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kiro ハンズオン手順書（初心者向け）- TODOアプリ構築</title>
+    <title>Kiro ハンズオン手順書（初心者向け）- HTML+CSS+JSで作るTODOアプリ</title>
     <style>
       * {
         margin: 0;
@@ -658,7 +658,7 @@
 <!-- ヘッダー -->
 <header class="header">
   <h1>🚀 Kiro ハンズオン手順書</h1>
-  <p class="subtitle">仕様駆動開発によるTODOアプリ構築ハンズオン</p>
+  <p class="subtitle">仕様駆動開発によるTODOアプリ構築ハンズオン（Node.js不要版）</p>
   <p class="date">2026年3月6日</p>
 </header>
 
@@ -688,7 +688,8 @@
       このハンズオンでは、Kiro
       IDEの4つの主要機能を使って、実際にTODOアプリを作ります。<br />
       所要時間は
-      <strong>30〜45分</strong> です。プログラミング経験がなくても大丈夫です。
+      <strong>30〜45分</strong> です。プログラミング経験がなくても大丈夫です。<br />
+      Node.jsのインストールは不要で、ブラウザだけで動くアプリを作ります。
     </p>
 
     <div class="goal-grid">
@@ -703,7 +704,7 @@
         <h4>🎛️ Steering（ステアリング）</h4>
         <p>プロジェクト固有のルールをAIに伝達</p>
         <p class="detail">
-          → 「TypeScriptを使って」「日本語コメントで」などのルール設定
+          → 「HTMLファイルは1つにまとめて」「日本語コメントで」などのルール設定
         </p>
       </div>
       <div class="goal-card">
@@ -762,12 +763,13 @@
         </div>
       </div>
       <div class="glossary-item">
-        <h5>React / TypeScript / Vite</h5>
+        <h5>HTML / CSS / JavaScript</h5>
         <p>
-          今回使う技術スタック。ReactはUI構築ライブラリ、TypeScriptは型安全なJavaScript、Viteは高速な開発サーバーです。
+          今回使う技術スタック。HTMLはページの構造、CSSは見た目のデザイン、JavaScriptは動きや処理を担当します。
+          この3つだけでWebアプリが作れます。
         </p>
         <div class="analogy">
-          🧱 たとえるなら：家を建てるための木材・釘・工具のセット
+          🧱 たとえるなら：HTMLが骨組み、CSSが壁紙やペンキ、JavaScriptが電気配線
         </div>
       </div>
       <div class="glossary-item">
@@ -804,9 +806,9 @@
         </td>
       </tr>
       <tr>
-        <td>Node.js</td>
-        <td>v18以上</td>
-        <td>ターミナルで <code class="inline">node -v</code> を実行</td>
+        <td>ブラウザ</td>
+        <td>Chrome / Edge / Firefox など</td>
+        <td>最新版を推奨</td>
       </tr>
       <tr>
         <td>アカウント</td>
@@ -817,11 +819,9 @@
 
     <div class="explain-box">
       <p>
-        <strong>Node.js</strong>
-        はJavaScriptをパソコン上で動かすためのソフトウェアです。
-        まだインストールしていない場合は
-        <a href="https://nodejs.org/" target="_blank">nodejs.org</a>
-        からLTS版をダウンロードしてください。
+        この版ではNode.jsのインストールは不要です。
+        HTML・CSS・JavaScriptだけで動くので、ブラウザさえあればOKです。
+        ファイルをダブルクリックするだけでアプリが開きます。
       </p>
     </div>
   </section>
@@ -924,8 +924,9 @@ cd todo-app</code>
           <pre>
 シンプルなTODOアプリを作成したい。
 - タスクの追加・削除・完了切り替えができる
-- React + TypeScriptで実装
+- HTML + CSS + JavaScript のみで実装（フレームワーク不要）
 - ローカルストレージでデータ永続化
+- index.html 1ファイルに HTML・CSS・JS をまとめる
 - シンプルでモダンなUI</pre
           >
         </div>
@@ -1002,7 +1003,7 @@ cd todo-app</code>
     <div class="why-box">
       <p>
         AIは万能ですが、プロジェクトごとの「お約束」は知りません。
-        たとえば「TypeScriptを使う」「日本語でコメントを書く」「anyは使わない」といったルールを
+        たとえば「HTMLファイル1つにまとめる」「日本語でコメントを書く」「varは使わない」といったルールを
         <strong>Steering</strong> で伝えることで、
         AIが生成するコードの品質が格段に上がります。
       </p>
@@ -1033,34 +1034,29 @@ cd todo-app</code>
           <code># TODOアプリ プロジェクトガイドライン
 
 ## 技術スタック
-- React 18
-- TypeScript
-- Vite
-- CSS Modules
+- HTML5
+- CSS3
+- JavaScript（ES6+）
+- フレームワーク・ライブラリ不要
 
 ## コーディング規約
-- 関数コンポーネントを使用
-- カスタムフックで状態管理ロジックを分離
+- index.html に HTML・CSS・JS をまとめる
+- const / let を使用（var 禁止）
 - 日本語コメントを推奨
-
-## ディレクトリ構成
-src/
-├── components/   # UIコンポーネント
-├── hooks/        # カスタムフック
-├── types/        # 型定義
-└── utils/        # ユーティリティ関数
+- セマンティックなHTML要素を使用
 
 ## 禁止事項
-- anyの使用禁止
-- classコンポーネント禁止</code>
+- var の使用禁止
+- 外部ライブラリの使用禁止
+- インラインスタイル禁止（style要素にまとめる）</code>
         </div>
 
         <div class="explain-box">
           <p>
             この設定により、Kiroは今後このプロジェクトでコードを生成するとき、上記のルールに従います。
             たとえば
-            <code class="inline">any</code>
-            型を使わない、関数コンポーネントだけを使う、といったことを自動で守ってくれます。
+            <code class="inline">var</code>
+            を使わない、外部ライブラリを使わない、といったことを自動で守ってくれます。
           </p>
         </div>
       </div>
@@ -1080,6 +1076,7 @@ src/
         <code class="inline">tasks.md</code>
         には、アプリを完成させるための手順が順番に並んでいます。
         Kiroはこのタスクリストに沿って、1つずつコードを自動生成してくれます。
+        今回はHTML・CSS・JavaScriptだけなので、生成されるファイルもシンプルです。
       </p>
     </div>
 
@@ -1112,137 +1109,172 @@ src/
       <div class="step-content">
         <h4>生成されるコードを確認</h4>
         <p>
-          Kiroが生成する主なファイルの例を紹介します。実際の出力は異なる場合があります。
+          Kiroが生成するコードの例を紹介します。今回は <code class="inline">index.html</code> 1ファイルにすべてまとまります。実際の出力は異なる場合があります。
         </p>
 
-        <h3>型定義（src/types/todo.ts）</h3>
-        <div class="code-block" data-lang="typescript">
+        <h3>HTML構造（index.html の body 部分）</h3>
+        <div class="code-block" data-lang="html">
           <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-          <code>export interface Todo {
-  id: string;
-  text: string;
-  completed: boolean;
-  createdAt: Date;
+          <code>&lt;div class="app"&gt;
+  &lt;h1&gt;📝 TODOアプリ&lt;/h1&gt;
+  &lt;form id="todo-form" class="todo-form"&gt;
+    &lt;input
+      type="text"
+      id="todo-input"
+      placeholder="新しいタスクを入力..."
+      class="todo-input"
+    /&gt;
+    &lt;button type="submit" class="add-btn"&gt;追加&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;ul id="todo-list" class="todo-list"&gt;&lt;/ul&gt;
+  &lt;p id="todo-count" class="todo-count"&gt;&lt;/p&gt;
+&lt;/div&gt;</code>
+        </div>
+        <div class="explain-box">
+          <p>
+            HTMLでアプリの「骨組み」を作ります。
+            <code class="inline">id</code> 属性をつけておくと、JavaScriptから要素を操作できます。
+            フォーム、入力欄、リスト、カウンター表示がそれぞれの役割を持っています。
+          </p>
+        </div>
+
+        <h3>CSSスタイル（index.html の style 部分）</h3>
+        <div class="code-block" data-lang="css">
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+          <code>.app {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.todo-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.add-btn {
+  padding: 10px 20px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.todo-list li.completed span {
+  text-decoration: line-through;
+  color: #94a3b8;
 }</code>
         </div>
         <div class="explain-box">
           <p>
-            <strong>interface</strong>
-            は「データの形」を定義するTypeScriptの機能です。 ここでは「TODOには
-            id, text, completed, createdAt がある」と宣言しています。
-            これにより、タイプミスや間違ったデータ型を使ったときにエラーで教えてくれます。
+            CSSでアプリの「見た目」を整えます。
+            <code class="inline">display: flex</code> でフォームの入力欄とボタンを横並びにし、
+            <code class="inline">.completed</code> クラスで完了済みタスクに取り消し線をつけています。
           </p>
         </div>
 
-        <h3>カスタムフック（src/hooks/useTodos.ts）</h3>
-        <div class="code-block" data-lang="typescript">
+        <h3>JavaScriptロジック（index.html の script 部分）</h3>
+        <div class="code-block" data-lang="javascript">
           <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-          <code>import { useState, useEffect } from 'react';
-import { Todo } from '../types/todo';
+          <code>// ローカルストレージからTODOを読み込み
+let todos = JSON.parse(localStorage.getItem('todos') || '[]');
 
-export const useTodos = () =&gt; {
-  const [todos, setTodos] = useState&lt;Todo[]&gt;(() =&gt; {
-    const saved = localStorage.getItem('todos');
-    return saved ? JSON.parse(saved) : [];
+// DOM要素の取得
+const form = document.getElementById('todo-form');
+const input = document.getElementById('todo-input');
+const list = document.getElementById('todo-list');
+const count = document.getElementById('todo-count');
+
+// TODOリストを画面に描画する関数
+function renderTodos() {
+  list.innerHTML = '';
+  todos.forEach(todo =&gt; {
+    const li = document.createElement('li');
+    if (todo.completed) li.classList.add('completed');
+
+    li.innerHTML = `
+      &lt;input type="checkbox" ${todo.completed ? 'checked' : ''}&gt;
+      &lt;span&gt;${todo.text}&lt;/span&gt;
+      &lt;button class="delete-btn"&gt;🗑️&lt;/button&gt;
+    `;
+
+    // チェックボックスで完了切り替え
+    li.querySelector('input').addEventListener('change', () =&gt; {
+      todo.completed = !todo.completed;
+      saveTodos();
+      renderTodos();
+    });
+
+    // 削除ボタン
+    li.querySelector('.delete-btn').addEventListener('click', () =&gt; {
+      todos = todos.filter(t =&gt; t.id !== todo.id);
+      saveTodos();
+      renderTodos();
+    });
+
+    list.appendChild(li);
   });
 
-  useEffect(() =&gt; {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
-  const addTodo = (text: string) =&gt; {
-    const newTodo: Todo = {
-      id: Date.now().toString(),
-      text,
-      completed: false,
-      createdAt: new Date()
-    };
-    setTodos([...todos, newTodo]);
-  };
-
-  const toggleTodo = (id: string) =&gt; {
-    setTodos(todos.map(todo =&gt;
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
-  };
-
-  const deleteTodo = (id: string) =&gt; {
-    setTodos(todos.filter(todo =&gt; todo.id !== id));
-  };
-
-  return { todos, addTodo, toggleTodo, deleteTodo };
-};</code>
-        </div>
-        <div class="explain-box">
-          <p>
-            <strong>カスタムフック</strong
-            >は、Reactの状態管理ロジックを再利用可能な形にまとめたものです。
-            ここでは「TODOの追加・切り替え・削除」と「ローカルストレージへの保存」をひとまとめにしています。
-            UIのコードと分離することで、見通しがよくなります。
-          </p>
-        </div>
-
-        <h3>メインコンポーネント（src/App.tsx）</h3>
-        <div class="code-block" data-lang="typescript">
-          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-          <code>import { useState } from 'react';
-import { useTodos } from './hooks/useTodos';
-import './App.css';
-
-function App() {
-  const [inputValue, setInputValue] = useState('');
-  const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
-
-  const handleSubmit = (e: React.FormEvent) =&gt; {
-    e.preventDefault();
-    if (inputValue.trim()) {
-      addTodo(inputValue.trim());
-      setInputValue('');
-    }
-  };
-
-  return (
-    &lt;div className="app"&gt;
-      &lt;h1&gt;📝 TODOアプリ&lt;/h1&gt;
-      &lt;form onSubmit={handleSubmit} className="todo-form"&gt;
-        &lt;input
-          type="text"
-          value={inputValue}
-          onChange={(e) =&gt; setInputValue(e.target.value)}
-          placeholder="新しいタスクを入力..."
-          className="todo-input"
-        /&gt;
-        &lt;button type="submit" className="add-btn"&gt;追加&lt;/button&gt;
-      &lt;/form&gt;
-      &lt;ul className="todo-list"&gt;
-        {todos.map(todo =&gt; (
-          &lt;li key={todo.id} className={todo.completed ? 'completed' : ''}&gt;
-            &lt;input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() =&gt; toggleTodo(todo.id)}
-            /&gt;
-            &lt;span&gt;{todo.text}&lt;/span&gt;
-            &lt;button onClick={() =&gt; deleteTodo(todo.id)}&gt;🗑️&lt;/button&gt;
-          &lt;/li&gt;
-        ))}
-      &lt;/ul&gt;
-      &lt;p className="todo-count"&gt;
-        残りタスク: {todos.filter(t =&gt; !t.completed).length}件
-      &lt;/p&gt;
-    &lt;/div&gt;
-  );
+  // 残りタスク数を更新
+  const remaining = todos.filter(t =&gt; !t.completed).length;
+  count.textContent = `残りタスク: ${remaining}件`;
 }
 
-export default App;</code>
+// ローカルストレージに保存
+function saveTodos() {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+// フォーム送信でTODO追加
+form.addEventListener('submit', (e) =&gt; {
+  e.preventDefault();
+  const text = input.value.trim();
+  if (!text) return;
+
+  todos.push({
+    id: Date.now().toString(),
+    text: text,
+    completed: false
+  });
+
+  saveTodos();
+  renderTodos();
+  input.value = '';
+});
+
+// 初期描画
+renderTodos();</code>
         </div>
         <div class="explain-box">
           <p>
-            これがアプリの「見た目」を担当するメインコンポーネントです。
-            先ほどのカスタムフック
-            <code class="inline">useTodos</code>
-            を呼び出して、TODOデータと操作関数を受け取っています。
-            フォームの送信、チェックボックスの切り替え、削除ボタンのクリックがそれぞれの関数に紐づいています。
+            これがアプリの「動き」を担当するJavaScriptです。
+            Reactのような特別なライブラリは使わず、ブラウザ標準の機能だけで実装しています。
+            <code class="inline">document.getElementById</code> でHTML要素を取得し、
+            <code class="inline">addEventListener</code> でクリックやフォーム送信に反応させています。
           </p>
         </div>
       </div>
@@ -1270,7 +1302,7 @@ export default App;</code>
           <table class="config-table">
             <tr><th>設定項目</th><td>値</td></tr>
             <tr><th>Event</th><td>File Saved</td></tr>
-            <tr><th>File path</th><td>src/**/*.{ts,tsx}</td></tr>
+            <tr><th>File path</th><td>*.html, *.js, *.css</td></tr>
           </table>
 
           <div class="prompt-box">
@@ -1282,7 +1314,7 @@ export default App;</code>
           </div>
 
           <div class="explain-box">
-            <p><code class="inline">src/**/*.{ts,tsx}</code> は「srcフォルダ以下の全ての .ts と .tsx ファイル」を意味します。
+            <p><code class="inline">*.html, *.js, *.css</code> は「プロジェクト内の全ての HTML・JS・CSS ファイル」を意味します。
             このHookを設定すると、コードを保存するたびにKiroが自動でテストを作成・実行してくれます。</p>
           </div>
         </div>
@@ -1296,15 +1328,15 @@ export default App;</code>
           <table class="config-table">
             <tr><th>設定項目</th><td>値</td></tr>
             <tr><th>Event</th><td>File Saved</td></tr>
-            <tr><th>File path</th><td>src/components/**/*.tsx</td></tr>
+            <tr><th>File path</th><td>index.html</td></tr>
           </table>
 
           <div class="prompt-box">
             <h5>📝 Instructions</h5>
-            <pre>コンポーネントが変更されたら：
-1. コンポーネントのPropsを分析
-2. README.mdのコンポーネント一覧を更新
-3. 使用例を追加</pre>
+            <pre>HTMLファイルが変更されたら：
+1. 変更内容を分析
+2. README.mdの機能一覧を更新
+3. 使い方の説明を追加</pre>
           </div>
 
           <div class="alert alert-info">
@@ -1325,17 +1357,15 @@ export default App;</code>
       <div class="step-item">
         <div class="step-number">12</div>
         <div class="step-content">
-          <h4>依存関係をインストール</h4>
-          <p>ターミナルで以下のコマンドを実行します：</p>
+          <h4>ファイルをブラウザで開く</h4>
+          <p>生成された <code class="inline">index.html</code> をブラウザで開きます。方法は2つあります：</p>
 
-          <div class="code-block" data-lang="bash">
-            <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-            <code>npm install</code>
-          </div>
+          <p>方法1: ファイルをダブルクリック</p>
+          <p>方法2: ブラウザにドラッグ＆ドロップ</p>
 
           <div class="explain-box">
-            <p><code class="inline">npm install</code> は、プロジェクトが必要とするライブラリ（React、TypeScriptなど）をダウンロードするコマンドです。
-            初回のみ実行が必要で、完了すると <code class="inline">node_modules</code> フォルダが作成されます。</p>
+            <p>Node.jsやnpmは不要です。HTMLファイルをブラウザで直接開くだけで動作します。
+            これがHTML+CSS+JavaScriptだけで作るメリットです。</p>
           </div>
         </div>
       </div>
@@ -1343,19 +1373,13 @@ export default App;</code>
       <div class="step-item">
         <div class="step-number">13</div>
         <div class="step-content">
-          <h4>開発サーバーを起動</h4>
+          <h4>コードを変更して確認</h4>
 
-          <div class="code-block" data-lang="bash">
-            <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-            <code>npm run dev</code>
-          </div>
-
-          <p>ブラウザで <a href="http://localhost:5173" target="_blank"><code class="inline">http://localhost:5173</code></a> を開いて動作確認</p>
+          <p>Kiroでコードを編集したら、ブラウザで <code class="inline">index.html</code> をリロード（F5 または Ctrl+R）して変更を確認します。</p>
 
           <div class="explain-box">
-            <p><code class="inline">npm run dev</code> は開発用サーバーを起動するコマンドです。
-            コードを変更すると自動でブラウザに反映されます（ホットリロード）。
-            サーバーを停止するには、ターミナルで <code class="inline">Ctrl + C</code> を押します。</p>
+            <p>開発サーバーは不要です。ファイルを保存してブラウザをリロードするだけで変更が反映されます。
+            シンプルですが、これがWeb開発の基本です。</p>
           </div>
         </div>
       </div>
@@ -1374,8 +1398,8 @@ export default App;</code>
           </ul>
 
           <div class="caution-box">
-            <p>もしアプリが表示されない場合は、ターミナルにエラーメッセージが出ていないか確認してください。
-            よくある原因は <code class="inline">npm install</code> の実行忘れです。</p>
+            <p>もしアプリが表示されない場合は、ブラウザの開発者ツール（F12）でコンソールにエラーが出ていないか確認してください。
+            よくある原因はHTMLの閉じタグの不足やJavaScriptの構文エラーです。</p>
           </div>
         </div>
       </div>
@@ -1393,22 +1417,7 @@ export default App;</code>
 │   │   └── <span class="file">product.md</span>       <span class="comment"># プロジェクトルール</span>
 │   └── <span class="folder">hooks/</span>                <span class="comment"># 自動処理</span>
 │       └── <span class="file">auto-test.md</span>     <span class="comment"># 自動テストHook</span>
-├── <span class="folder">src/</span>                      <span class="comment"># ソースコード</span>
-│   ├── <span class="folder">components/</span>           <span class="comment"># UIパーツ</span>
-│   │   ├── <span class="file">TodoItem.tsx</span>
-│   │   ├── <span class="file">TodoList.tsx</span>
-│   │   └── <span class="file">TodoForm.tsx</span>
-│   ├── <span class="folder">hooks/</span>                <span class="comment"># ロジック</span>
-│   │   └── <span class="file">useTodos.ts</span>
-│   ├── <span class="folder">types/</span>                <span class="comment"># 型定義</span>
-│   │   └── <span class="file">todo.ts</span>
-│   ├── <span class="file">App.tsx</span>              <span class="comment"># メイン画面</span>
-│   ├── <span class="file">App.css</span>              <span class="comment"># スタイル</span>
-│   └── <span class="file">main.tsx</span>             <span class="comment"># 起動ファイル</span>
-├── <span class="file">index.html</span>
-├── <span class="file">package.json</span>             <span class="comment"># 依存関係の定義</span>
-├── <span class="file">tsconfig.json</span>            <span class="comment"># TypeScript設定</span>
-└── <span class="file">vite.config.ts</span>           <span class="comment"># Vite設定</span></pre>
+└── <span class="file">index.html</span>               <span class="comment"># アプリ本体（HTML+CSS+JS）</span></pre>
       </div>
     </section>
 
@@ -1448,36 +1457,34 @@ export default App;</code>
           <strong>解決方法：</strong>
           <ul style="margin-left: 20px; margin-top: 8px">
             <li>より具体的な要件を記述する（箇条書きがおすすめ）</li>
-            <li>技術スタック（React、TypeScriptなど）を明示する</li>
+            <li>技術スタック（HTML、CSS、JavaScriptなど）を明示する</li>
             <li>インターネット接続を確認する</li>
           </ul>
         </div>
       </div>
 
       <div class="trouble-item">
-        <h5>❌ npm run dev でエラーが出る</h5>
-        <p>依存関係のインストールが完了していない可能性があります。</p>
+        <h5>❌ ブラウザで開いても何も表示されない</h5>
+        <p>HTMLの構造にエラーがある可能性があります。</p>
         <div class="solution">
           <strong>解決方法：</strong>
-          <div class="code-block" data-lang="bash" style="margin-top: 8px">
-            <code>rm -rf node_modules
-npm install</code>
-          </div>
-          <p style="margin-top: 8px; font-size: 0.85rem; color: #64748b;">
-            ↑ node_modulesフォルダを削除して、もう一度インストールし直すコマンドです
-          </p>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>ブラウザの開発者ツール（F12）→ Console タブでエラーを確認</li>
+            <li>HTMLの閉じタグが正しいか確認する</li>
+            <li>Chatで「HTMLのエラーを修正して」と依頼する</li>
+          </ul>
         </div>
       </div>
 
       <div class="trouble-item">
-        <h5>❌ TypeScriptエラーが発生する</h5>
-        <p>型定義が不足しているか、インポートパスが間違っている可能性があります。</p>
+        <h5>❌ JavaScriptエラーが発生する</h5>
+        <p>変数名の間違いや構文エラーの可能性があります。</p>
         <div class="solution">
           <strong>解決方法：</strong>
           <ul style="margin-left: 20px; margin-top: 8px">
-            <li>Chatで「TypeScriptエラーを修正して」と依頼する</li>
-            <li>tsconfig.json の設定を確認する</li>
-            <li>ファイルのインポートパス（相対パス）が正しいか確認する</li>
+            <li>ブラウザの開発者ツール（F12）→ Console タブでエラーメッセージを確認</li>
+            <li>Chatで「JavaScriptのエラーを修正して」と依頼する</li>
+            <li>scriptタグがbodyの閉じタグの直前にあるか確認する</li>
           </ul>
         </div>
       </div>
@@ -1587,10 +1594,10 @@ npm install</code>
       const cbs = document.querySelectorAll('#mainChecklist input[type="checkbox"]');
       const states = [];
       cbs.forEach(cb => states.push(cb.checked));
-      localStorage.setItem('kiro-beginner-checklist', JSON.stringify(states));
+      localStorage.setItem('kiro-beginner-htmlcss-checklist', JSON.stringify(states));
     }
     function loadChecklistState() {
-      const saved = localStorage.getItem('kiro-beginner-checklist');
+      const saved = localStorage.getItem('kiro-beginner-htmlcss-checklist');
       if (saved) {
         const states = JSON.parse(saved);
         const cbs = document.querySelectorAll('#mainChecklist input[type="checkbox"]');
