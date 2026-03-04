@@ -1,0 +1,1639 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kiro ハンズオン手順書（初心者向け）- TODOアプリ構築</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+          sans-serif;
+        background: #f0f4f8;
+        color: #1e293b;
+        line-height: 1.9;
+        font-size: 16px;
+      }
+
+      /* ヘッダー */
+      .header {
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        color: white;
+        padding: 70px 20px 60px;
+        text-align: center;
+      }
+      .header h1 {
+        font-size: 2.4rem;
+        margin-bottom: 12px;
+      }
+      .header .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.95;
+        margin-bottom: 8px;
+      }
+      .header .badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 6px 18px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-top: 12px;
+      }
+      .header .date {
+        font-size: 0.9rem;
+        opacity: 0.75;
+        margin-top: 10px;
+      }
+
+      /* ナビゲーション */
+      .nav {
+        background: white;
+        padding: 14px 20px;
+        position: sticky;
+        top: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        z-index: 100;
+        overflow-x: auto;
+      }
+      .nav-inner {
+        max-width: 860px;
+        margin: 0 auto;
+        display: flex;
+        gap: 4px;
+        justify-content: space-between;
+      }
+      .nav a {
+        color: #3b82f6;
+        text-decoration: none;
+        padding: 8px 10px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.82rem;
+        white-space: nowrap;
+        flex: 1;
+        text-align: center;
+        transition: all 0.2s;
+      }
+      .nav a:hover {
+        background: #3b82f6;
+        color: white;
+      }
+      .nav a.active {
+        background: #3b82f6;
+        color: white;
+      }
+
+      /* メインコンテンツ */
+      .container {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 36px 20px;
+      }
+
+      /* セクション */
+      .section {
+        background: white;
+        border-radius: 16px;
+        padding: 36px;
+        margin-bottom: 28px;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+      }
+      .section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 3px solid #3b82f6;
+      }
+      .section h3 {
+        color: #475569;
+        font-size: 1.15rem;
+        margin: 28px 0 14px;
+      }
+
+      /* 初心者向け解説ボックス */
+      .explain-box {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border: 1px solid #bae6fd;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin: 18px 0;
+        position: relative;
+      }
+      .explain-box::before {
+        content: "💡 ここがポイント";
+        display: block;
+        font-weight: 700;
+        color: #0369a1;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+      }
+      .explain-box p {
+        color: #334155;
+        font-size: 0.95rem;
+      }
+
+      /* 「なぜ？」ボックス */
+      .why-box {
+        background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+        border: 1px solid #fde68a;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin: 18px 0;
+      }
+      .why-box::before {
+        content: "🤔 なぜこれが必要？";
+        display: block;
+        font-weight: 700;
+        color: #92400e;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+      }
+      .why-box p {
+        color: #451a03;
+        font-size: 0.95rem;
+      }
+
+      /* 注意ボックス */
+      .caution-box {
+        background: #fef2f2;
+        border-left: 4px solid #ef4444;
+        border-radius: 0 12px 12px 0;
+        padding: 16px 20px;
+        margin: 18px 0;
+      }
+      .caution-box::before {
+        content: "⚠️ よくある間違い";
+        display: block;
+        font-weight: 700;
+        color: #dc2626;
+        margin-bottom: 6px;
+        font-size: 0.95rem;
+      }
+      .caution-box p {
+        color: #7f1d1d;
+        font-size: 0.9rem;
+      }
+
+      /* 学習目標カード */
+      .goal-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 20px;
+      }
+      .goal-card {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        padding: 22px;
+        border-radius: 12px;
+        border-left: 4px solid #3b82f6;
+      }
+      .goal-card h4 {
+        color: #1d4ed8;
+        margin-bottom: 8px;
+        font-size: 1.05rem;
+      }
+      .goal-card p {
+        color: #475569;
+        font-size: 0.9rem;
+      }
+      .goal-card .detail {
+        color: #64748b;
+        font-size: 0.82rem;
+        margin-top: 6px;
+        font-style: italic;
+      }
+
+      /* 前提条件テーブル */
+      .prereq-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+      }
+      .prereq-table th,
+      .prereq-table td {
+        padding: 14px 16px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .prereq-table th {
+        background: #f1f5f9;
+        color: #3b82f6;
+        font-weight: 600;
+      }
+
+      /* ステップヘッダー */
+      .step-header {
+        background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        font-size: 1.25rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .step-header .time-est {
+        margin-left: auto;
+        font-size: 0.8rem;
+        opacity: 0.85;
+        font-weight: normal;
+      }
+
+      /* 手順番号 */
+      .step-item {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 28px;
+        align-items: flex-start;
+      }
+      .step-number {
+        width: 38px;
+        height: 38px;
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .step-content {
+        flex: 1;
+      }
+      .step-content h4 {
+        color: #1e293b;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+      .step-content p {
+        color: #64748b;
+        margin-bottom: 12px;
+      }
+
+      /* コードブロック */
+      .code-block {
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 14px 0;
+        overflow-x: auto;
+        position: relative;
+      }
+      .code-block::before {
+        content: attr(data-lang);
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 0.7rem;
+        color: #64748b;
+        text-transform: uppercase;
+      }
+      .code-block code {
+        font-family: "Consolas", "Monaco", "Courier New", monospace;
+        font-size: 0.88rem;
+        line-height: 1.7;
+        white-space: pre;
+      }
+      /* コピーボタン */
+      .copy-btn {
+        position: absolute;
+        top: 8px;
+        right: 70px;
+        background: #475569;
+        color: white;
+        border: none;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .copy-btn:hover {
+        background: #3b82f6;
+      }
+
+      /* インラインコード */
+      .step-content code,
+      code.inline {
+        background: #e0e7ff;
+        color: #4338ca;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: "Consolas", "Monaco", monospace;
+        font-size: 0.85em;
+      }
+      .code-block code {
+        background: transparent;
+        color: #e2e8f0;
+        padding: 0;
+        border-radius: 0;
+        font-size: 0.88rem;
+      }
+
+      /* プロンプトボックス */
+      .prompt-box {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border-left: 4px solid #f59e0b;
+        padding: 20px;
+        border-radius: 0 12px 12px 0;
+        margin: 16px 0;
+      }
+      .prompt-box h5 {
+        color: #92400e;
+        margin-bottom: 10px;
+      }
+      .prompt-box pre {
+        background: white;
+        padding: 16px;
+        border-radius: 8px;
+        font-family: "Consolas", monospace;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        color: #1e293b;
+      }
+
+      /* ファイル説明 */
+      .file-desc {
+        display: grid;
+        gap: 12px;
+        margin: 16px 0;
+      }
+      .file-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 20px;
+        background: #f8fafc;
+        border-radius: 10px;
+        border-left: 4px solid #3b82f6;
+      }
+      .file-icon {
+        font-size: 1.5rem;
+      }
+      .file-info h5 {
+        color: #1e293b;
+        font-size: 0.95rem;
+      }
+      .file-info p {
+        color: #64748b;
+        font-size: 0.85rem;
+      }
+      .file-info .beginner-note {
+        color: #0369a1;
+        font-size: 0.8rem;
+        margin-top: 4px;
+      }
+
+      /* 用語カード */
+      .glossary-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 16px;
+      }
+      .glossary-item {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 20px;
+        border-left: 4px solid #8b5cf6;
+      }
+      .glossary-item h5 {
+        color: #6d28d9;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+      .glossary-item p {
+        color: #475569;
+        font-size: 0.9rem;
+      }
+      .glossary-item .analogy {
+        background: #faf5ff;
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-top: 8px;
+        font-size: 0.85rem;
+        color: #7c3aed;
+      }
+
+      /* アラート */
+      .alert {
+        padding: 16px 20px;
+        border-radius: 10px;
+        margin: 16px 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .alert-info {
+        background: #dbeafe;
+        border-left: 4px solid #3b82f6;
+      }
+      .alert-tip {
+        background: #dcfce7;
+        border-left: 4px solid #22c55e;
+      }
+      .alert-icon {
+        font-size: 1.3rem;
+      }
+
+      /* Hooks設定テーブル */
+      .config-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+      }
+      .config-table th,
+      .config-table td {
+        padding: 12px 16px;
+        text-align: left;
+        border: 1px solid #e2e8f0;
+      }
+      .config-table th {
+        background: #f1f5f9;
+        color: #475569;
+        font-weight: 600;
+        width: 140px;
+      }
+      .config-table td {
+        font-family: "Consolas", monospace;
+        color: #3b82f6;
+      }
+
+      /* ディレクトリ構成 */
+      .dir-tree {
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 24px;
+        border-radius: 12px;
+        font-family: "Consolas", "Monaco", monospace;
+        font-size: 0.85rem;
+        line-height: 1.8;
+        overflow-x: auto;
+      }
+      .dir-tree pre {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        white-space: pre;
+      }
+      .dir-tree .folder {
+        color: #60a5fa;
+      }
+      .dir-tree .file {
+        color: #a5f3fc;
+      }
+      .dir-tree .comment {
+        color: #64748b;
+      }
+
+      /* チェックリスト */
+      .checklist {
+        list-style: none;
+      }
+      .checklist li {
+        padding: 14px 18px;
+        margin-bottom: 10px;
+        background: #f8fafc;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transition: background 0.3s;
+        cursor: pointer;
+      }
+      .checklist li:hover {
+        background: #e0f2fe;
+      }
+      .checklist li.checked {
+        background: #dcfce7;
+      }
+      .checklist input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+        accent-color: #3b82f6;
+        cursor: pointer;
+      }
+      .checklist label {
+        cursor: pointer;
+        flex: 1;
+      }
+
+      /* 進捗バー */
+      .progress-container {
+        background: #e2e8f0;
+        border-radius: 10px;
+        height: 12px;
+        margin: 20px 0;
+        overflow: hidden;
+      }
+      .progress-bar {
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        height: 100%;
+        border-radius: 10px;
+        transition: width 0.5s ease;
+      }
+      .progress-text {
+        text-align: center;
+        color: #64748b;
+        font-size: 0.9rem;
+        margin-top: 8px;
+      }
+
+      /* トラブルシューティング */
+      .trouble-item {
+        background: #fef2f2;
+        border-left: 4px solid #ef4444;
+        padding: 16px 20px;
+        border-radius: 0 10px 10px 0;
+        margin: 12px 0;
+      }
+      .trouble-item h5 {
+        color: #dc2626;
+        margin-bottom: 8px;
+      }
+      .trouble-item p {
+        color: #64748b;
+        font-size: 0.9rem;
+      }
+      .trouble-item .solution {
+        background: white;
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 10px;
+        color: #1e293b;
+      }
+
+      /* フッター */
+      .footer {
+        text-align: center;
+        padding: 40px;
+        color: #64748b;
+        font-size: 0.9rem;
+        background: white;
+        margin-top: 40px;
+      }
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: #3b82f6;
+        text-decoration: none;
+      }
+      .footer-links a:hover {
+        color: #1d4ed8;
+      }
+
+      /* 印刷 */
+      @media print {
+        .nav,
+        .copy-btn {
+          display: none;
+        }
+        .section {
+          break-inside: avoid;
+          box-shadow: none;
+          border: 1px solid #e2e8f0;
+        }
+      }
+
+      /* レスポンシブ */
+      @media (max-width: 1024px) {
+        .nav-inner {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 6px;
+        }
+        .nav a {
+          flex: 0 1 auto;
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-inner {
+          flex-direction: column;
+          gap: 4px;
+        }
+        .nav a {
+          width: 100%;
+        }
+      }
+      @media (max-width: 640px) {
+        .header h1 {
+          font-size: 1.8rem;
+        }
+        .section {
+          padding: 20px;
+        }
+        .step-item {
+          flex-direction: column;
+        }
+        .goal-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
+
+<!-- ヘッダー -->
+<header class="header">
+  <h1>🚀 Kiro ハンズオン手順書</h1>
+  <p class="subtitle">仕様駆動開発によるTODOアプリ構築ハンズオン</p>
+  <p class="date">2026年3月6日</p>
+</header>
+
+<!-- ナビゲーション -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#goals">学習目標</a>
+    <a href="#glossary">用語説明</a>
+    <a href="#prereq">前提条件</a>
+    <a href="#step1">Step 1</a>
+    <a href="#step2">Step 2</a>
+    <a href="#step3">Step 3</a>
+    <a href="#step4">Step 4</a>
+    <a href="#step5">Step 5</a>
+    <a href="#step6">Step 6</a>
+    <a href="#checklist">確認</a>
+    <a href="#trouble">トラブル</a>
+  </div>
+</nav>
+
+<!-- メインコンテンツ -->
+<main class="container">
+  <!-- 学習目標 -->
+  <section class="section" id="goals">
+    <h2>🎯 このハンズオンで学ぶこと</h2>
+    <p>
+      このハンズオンでは、Kiro
+      IDEの4つの主要機能を使って、実際にTODOアプリを作ります。<br />
+      所要時間は
+      <strong>30〜45分</strong> です。プログラミング経験がなくても大丈夫です。
+    </p>
+
+    <div class="goal-grid">
+      <div class="goal-card">
+        <h4>📋 Specs（スペック）</h4>
+        <p>自然言語から要件・設計・タスクを自動生成</p>
+        <p class="detail">
+          → 「こんなアプリ作りたい」と伝えるだけで設計書ができる
+        </p>
+      </div>
+      <div class="goal-card">
+        <h4>🎛️ Steering（ステアリング）</h4>
+        <p>プロジェクト固有のルールをAIに伝達</p>
+        <p class="detail">
+          → 「TypeScriptを使って」「日本語コメントで」などのルール設定
+        </p>
+      </div>
+      <div class="goal-card">
+        <h4>💬 Chat（チャット）</h4>
+        <p>コンテキストを理解したAIとの対話</p>
+        <p class="detail">
+          → プロジェクトの中身を理解した上で質問に答えてくれる
+        </p>
+      </div>
+      <div class="goal-card">
+        <h4>🔗 Hooks（フック）</h4>
+        <p>ファイル変更時の自動処理</p>
+        <p class="detail">→ ファイルを保存したら自動でテストを実行、など</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 用語説明 -->
+  <section class="section" id="glossary">
+    <h2>📖 はじめに知っておきたい用語</h2>
+    <p>ハンズオンを始める前に、出てくる用語を確認しておきましょう。</p>
+
+    <div class="glossary-grid">
+      <div class="glossary-item">
+        <h5>IDE（統合開発環境）</h5>
+        <p>
+          コードを書く・実行する・デバッグするなど、開発に必要な機能がまとまったアプリケーションのこと。Kiroはこの一種です。
+        </p>
+        <div class="analogy">
+          🏠 たとえるなら：料理に必要な道具が全部揃ったキッチン
+        </div>
+      </div>
+      <div class="glossary-item">
+        <h5>Specs（仕様書）</h5>
+        <p>
+          アプリの「何を作るか」「どう作るか」「何をやるか」を文書化したもの。Kiroでは自然言語で伝えるだけで自動生成されます。
+        </p>
+        <div class="analogy">📐 たとえるなら：家を建てる前の設計図</div>
+      </div>
+      <div class="glossary-item">
+        <h5>Steering（ステアリング）</h5>
+        <p>
+          AIに対して「このプロジェクトではこういうルールで書いてね」と伝える設定ファイル。
+        </p>
+        <div class="analogy">
+          🧭 たとえるなら：料理のレシピに書かれた「塩は控えめに」などの注意書き
+        </div>
+      </div>
+      <div class="glossary-item">
+        <h5>Hooks（フック）</h5>
+        <p>
+          特定のイベント（ファイル保存など）が起きたときに、自動で処理を実行する仕組み。
+        </p>
+        <div class="analogy">
+          🔔 たとえるなら：ドアが開いたら自動で電気がつく仕組み
+        </div>
+      </div>
+      <div class="glossary-item">
+        <h5>React / TypeScript / Vite</h5>
+        <p>
+          今回使う技術スタック。ReactはUI構築ライブラリ、TypeScriptは型安全なJavaScript、Viteは高速な開発サーバーです。
+        </p>
+        <div class="analogy">
+          🧱 たとえるなら：家を建てるための木材・釘・工具のセット
+        </div>
+      </div>
+      <div class="glossary-item">
+        <h5>ローカルストレージ</h5>
+        <p>
+          ブラウザにデータを保存する仕組み。ページをリロードしてもデータが消えません。
+        </p>
+        <div class="analogy">
+          🗄️ たとえるなら：ブラウザの中にある小さな引き出し
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 前提条件 -->
+  <section class="section" id="prereq">
+    <h2>📋 前提条件</h2>
+    <p>ハンズオンを始める前に、以下が準備できていることを確認してください。</p>
+
+    <table class="prereq-table">
+      <tr>
+        <th>項目</th>
+        <th>要件</th>
+        <th>確認方法</th>
+      </tr>
+      <tr>
+        <td>Kiro IDE</td>
+        <td>インストール済み</td>
+        <td>
+          <a href="https://kiro.dev/downloads/" target="_blank"
+            >kiro.dev/downloads</a
+          >
+          からダウンロード
+        </td>
+      </tr>
+      <tr>
+        <td>Node.js</td>
+        <td>v18以上</td>
+        <td>ターミナルで <code class="inline">node -v</code> を実行</td>
+      </tr>
+      <tr>
+        <td>アカウント</td>
+        <td>GitHub / Google / AWS Builder ID のいずれか</td>
+        <td>サインインできることを確認</td>
+      </tr>
+    </table>
+
+    <div class="explain-box">
+      <p>
+        <strong>Node.js</strong>
+        はJavaScriptをパソコン上で動かすためのソフトウェアです。
+        まだインストールしていない場合は
+        <a href="https://nodejs.org/" target="_blank">nodejs.org</a>
+        からLTS版をダウンロードしてください。
+      </p>
+    </div>
+  </section>
+
+  <!-- Step 1 -->
+  <section class="section" id="step1">
+    <div class="step-header">
+      Step 1: プロジェクトのセットアップ
+      <span class="time-est">⏱ 約3分</span>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Kiro IDEを起動してサインイン</h4>
+        <p>
+          Kiro IDEを起動し、GitHub、Google、またはAWS Builder
+          IDでサインインします。
+        </p>
+
+        <div class="explain-box">
+          <p>
+            初回起動時にサインイン画面が表示されます。お持ちのアカウントでサインインしてください。どのアカウントでも機能は同じです。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>新規プロジェクトフォルダを作成</h4>
+        <p>
+          <strong>File → Open Folder</strong>
+          から空のフォルダを選択（または新規作成）
+        </p>
+        <p>
+          ターミナルで以下のコマンドを実行してフォルダを作成することもできます：
+        </p>
+
+        <div class="code-block" data-lang="bash">
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+          <code>mkdir todo-app
+cd todo-app</code>
+        </div>
+
+        <div class="explain-box">
+          <p>
+            <code class="inline">mkdir</code>
+            は「フォルダを作る」コマンド、<code class="inline">cd</code>
+            は「そのフォルダに移動する」コマンドです。 作成したフォルダをKiroの
+            <strong>File → Open Folder</strong> で開いてください。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="section" id="step2">
+    <div class="step-header">
+      Step 2: Specsで仕様を作成
+      <span class="time-est">⏱ 約5分</span>
+    </div>
+
+    <div class="why-box">
+      <p>
+        通常のアプリ開発では、まず「何を作るか」を決めてから「どう作るか」を設計し、「やることリスト」を作ります。
+        Kiroの
+        <strong>Specs</strong>
+        はこの3つを、あなたの説明から自動で生成してくれます。
+      </p>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>Specの作成を開始</h4>
+        <p>
+          左サイドバーの <strong>「SPECS」</strong> セクションで
+          <strong>「+」</strong> ボタンをクリック
+        </p>
+
+        <div class="explain-box">
+          <p>
+            Kiroの画面左側にあるサイドバーを見てください。「SPECS」という項目があります。その横の「+」ボタンを押すと、新しい仕様書の作成が始まります。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h4>プロンプトを入力</h4>
+        <p>以下のテキストをそのままコピーして貼り付けてください：</p>
+
+        <div class="prompt-box">
+          <h5>📝 入力するプロンプト</h5>
+          <pre>
+シンプルなTODOアプリを作成したい。
+- タスクの追加・削除・完了切り替えができる
+- React + TypeScriptで実装
+- ローカルストレージでデータ永続化
+- シンプルでモダンなUI</pre
+          >
+        </div>
+
+        <div class="caution-box">
+          <p>
+            プロンプトが短すぎると、Kiroが意図を正しく理解できないことがあります。上記のように箇条書きで具体的に書くのがコツです。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h4>自動生成されるファイルを確認</h4>
+        <p>
+          Kiroが以下の3つのファイルを自動で生成します。それぞれの役割を理解しましょう：
+        </p>
+
+        <div class="file-desc">
+          <div class="file-item">
+            <span class="file-icon">📋</span>
+            <div class="file-info">
+              <h5>requirements.md（要件定義）</h5>
+              <p>「何を作るか」を定義したファイル</p>
+              <p class="beginner-note">
+                →
+                ユーザーストーリー（「ユーザーとして〇〇したい」）の形式で書かれています
+              </p>
+            </div>
+          </div>
+          <div class="file-item">
+            <span class="file-icon">🏗️</span>
+            <div class="file-info">
+              <h5>design.md（技術設計）</h5>
+              <p>「どう作るか」を設計したファイル</p>
+              <p class="beginner-note">
+                → 使う技術、ファイル構成、データの流れなどが書かれています
+              </p>
+            </div>
+          </div>
+          <div class="file-item">
+            <span class="file-icon">✅</span>
+            <div class="file-info">
+              <h5>tasks.md（タスクリスト）</h5>
+              <p>「やることリスト」を整理したファイル</p>
+              <p class="beginner-note">
+                → 実装の順番がチェックリスト形式で並んでいます
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-tip">
+          <span class="alert-icon">💡</span>
+          <div>
+            各ファイルの内容を確認し、問題なければ
+            <strong>「Approve」</strong>
+            ボタンで承認してください。修正したい場合はチャットで指示できます。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="section" id="step3">
+    <div class="step-header">
+      Step 3: Steeringを設定
+      <span class="time-est">⏱ 約3分</span>
+    </div>
+
+    <div class="why-box">
+      <p>
+        AIは万能ですが、プロジェクトごとの「お約束」は知りません。
+        たとえば「TypeScriptを使う」「日本語でコメントを書く」「anyは使わない」といったルールを
+        <strong>Steering</strong> で伝えることで、
+        AIが生成するコードの品質が格段に上がります。
+      </p>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <h4>Steeringファイルを作成</h4>
+        <p>
+          左サイドバーの <strong>「AGENT STEERING」</strong> セクションで
+          <strong>「+」</strong> ボタンをクリック
+        </p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">7</div>
+      <div class="step-content">
+        <h4>プロジェクトルールを記述</h4>
+        <p>
+          <code>product.md</code>
+          を選択し、以下の内容をコピーして貼り付けてください：
+        </p>
+
+        <div class="code-block" data-lang="markdown">
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+          <code># TODOアプリ プロジェクトガイドライン
+
+## 技術スタック
+- React 18
+- TypeScript
+- Vite
+- CSS Modules
+
+## コーディング規約
+- 関数コンポーネントを使用
+- カスタムフックで状態管理ロジックを分離
+- 日本語コメントを推奨
+
+## ディレクトリ構成
+src/
+├── components/   # UIコンポーネント
+├── hooks/        # カスタムフック
+├── types/        # 型定義
+└── utils/        # ユーティリティ関数
+
+## 禁止事項
+- anyの使用禁止
+- classコンポーネント禁止</code>
+        </div>
+
+        <div class="explain-box">
+          <p>
+            この設定により、Kiroは今後このプロジェクトでコードを生成するとき、上記のルールに従います。
+            たとえば
+            <code class="inline">any</code>
+            型を使わない、関数コンポーネントだけを使う、といったことを自動で守ってくれます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 4 -->
+  <section class="section" id="step4">
+    <div class="step-header">
+      Step 4: タスクに従って実装
+      <span class="time-est">⏱ 約10分</span>
+    </div>
+
+    <div class="why-box">
+      <p>
+        Step 2で生成された
+        <code class="inline">tasks.md</code>
+        には、アプリを完成させるための手順が順番に並んでいます。
+        Kiroはこのタスクリストに沿って、1つずつコードを自動生成してくれます。
+      </p>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">8</div>
+      <div class="step-content">
+        <h4>タスクリストを開いて実行</h4>
+        <p>生成された <code>tasks.md</code> を開き、Chatで以下を指示：</p>
+
+        <div class="prompt-box">
+          <h5>📝 入力するプロンプト</h5>
+          <pre>最初のタスクから順番に実行してください</pre>
+        </div>
+
+        <p>
+          または、タスクを選択して <strong>「Start task」</strong> をクリック
+        </p>
+
+        <div class="explain-box">
+          <p>
+            Kiroがタスクを1つずつ実行し、必要なファイルを自動で作成・編集していきます。
+            各タスクが完了するたびに、生成されたコードを確認できます。わからないことがあればChatで質問できます。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">9</div>
+      <div class="step-content">
+        <h4>生成されるコードを確認</h4>
+        <p>
+          Kiroが生成する主なファイルの例を紹介します。実際の出力は異なる場合があります。
+        </p>
+
+        <h3>型定義（src/types/todo.ts）</h3>
+        <div class="code-block" data-lang="typescript">
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+          <code>export interface Todo {
+  id: string;
+  text: string;
+  completed: boolean;
+  createdAt: Date;
+}</code>
+        </div>
+        <div class="explain-box">
+          <p>
+            <strong>interface</strong>
+            は「データの形」を定義するTypeScriptの機能です。 ここでは「TODOには
+            id, text, completed, createdAt がある」と宣言しています。
+            これにより、タイプミスや間違ったデータ型を使ったときにエラーで教えてくれます。
+          </p>
+        </div>
+
+        <h3>カスタムフック（src/hooks/useTodos.ts）</h3>
+        <div class="code-block" data-lang="typescript">
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+          <code>import { useState, useEffect } from 'react';
+import { Todo } from '../types/todo';
+
+export const useTodos = () =&gt; {
+  const [todos, setTodos] = useState&lt;Todo[]&gt;(() =&gt; {
+    const saved = localStorage.getItem('todos');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() =&gt; {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const addTodo = (text: string) =&gt; {
+    const newTodo: Todo = {
+      id: Date.now().toString(),
+      text,
+      completed: false,
+      createdAt: new Date()
+    };
+    setTodos([...todos, newTodo]);
+  };
+
+  const toggleTodo = (id: string) =&gt; {
+    setTodos(todos.map(todo =&gt;
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
+  };
+
+  const deleteTodo = (id: string) =&gt; {
+    setTodos(todos.filter(todo =&gt; todo.id !== id));
+  };
+
+  return { todos, addTodo, toggleTodo, deleteTodo };
+};</code>
+        </div>
+        <div class="explain-box">
+          <p>
+            <strong>カスタムフック</strong
+            >は、Reactの状態管理ロジックを再利用可能な形にまとめたものです。
+            ここでは「TODOの追加・切り替え・削除」と「ローカルストレージへの保存」をひとまとめにしています。
+            UIのコードと分離することで、見通しがよくなります。
+          </p>
+        </div>
+
+        <h3>メインコンポーネント（src/App.tsx）</h3>
+        <div class="code-block" data-lang="typescript">
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+          <code>import { useState } from 'react';
+import { useTodos } from './hooks/useTodos';
+import './App.css';
+
+function App() {
+  const [inputValue, setInputValue] = useState('');
+  const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
+
+  const handleSubmit = (e: React.FormEvent) =&gt; {
+    e.preventDefault();
+    if (inputValue.trim()) {
+      addTodo(inputValue.trim());
+      setInputValue('');
+    }
+  };
+
+  return (
+    &lt;div className="app"&gt;
+      &lt;h1&gt;📝 TODOアプリ&lt;/h1&gt;
+      &lt;form onSubmit={handleSubmit} className="todo-form"&gt;
+        &lt;input
+          type="text"
+          value={inputValue}
+          onChange={(e) =&gt; setInputValue(e.target.value)}
+          placeholder="新しいタスクを入力..."
+          className="todo-input"
+        /&gt;
+        &lt;button type="submit" className="add-btn"&gt;追加&lt;/button&gt;
+      &lt;/form&gt;
+      &lt;ul className="todo-list"&gt;
+        {todos.map(todo =&gt; (
+          &lt;li key={todo.id} className={todo.completed ? 'completed' : ''}&gt;
+            &lt;input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() =&gt; toggleTodo(todo.id)}
+            /&gt;
+            &lt;span&gt;{todo.text}&lt;/span&gt;
+            &lt;button onClick={() =&gt; deleteTodo(todo.id)}&gt;🗑️&lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+      &lt;p className="todo-count"&gt;
+        残りタスク: {todos.filter(t =&gt; !t.completed).length}件
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code>
+        </div>
+        <div class="explain-box">
+          <p>
+            これがアプリの「見た目」を担当するメインコンポーネントです。
+            先ほどのカスタムフック
+            <code class="inline">useTodos</code>
+            を呼び出して、TODOデータと操作関数を受け取っています。
+            フォームの送信、チェックボックスの切り替え、削除ボタンのクリックがそれぞれの関数に紐づいています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Step 5 -->
+    <section class="section" id="step5">
+      <div class="step-header">
+        Step 5: Hooksを設定（オプション）
+        <span class="time-est">⏱ 約3分</span>
+      </div>
+
+      <div class="why-box">
+        <p><strong>Hooks</strong> を使うと、「ファイルを保存したら自動でテストを実行する」といった自動化ができます。
+        手動で毎回テストを実行する手間が省け、バグの早期発見にもつながります。</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">10</div>
+        <div class="step-content">
+          <h4>自動テスト生成Hookを作成</h4>
+          <p>左サイドバーの <strong>「AGENT HOOKS」</strong> セクションで <strong>「+」</strong> ボタンをクリック</p>
+
+          <table class="config-table">
+            <tr><th>設定項目</th><td>値</td></tr>
+            <tr><th>Event</th><td>File Saved</td></tr>
+            <tr><th>File path</th><td>src/**/*.{ts,tsx}</td></tr>
+          </table>
+
+          <div class="prompt-box">
+            <h5>📝 Instructions</h5>
+            <pre>ファイルが保存されたら：
+1. 変更内容を分析
+2. 対応するテストファイルを作成・更新
+3. テストを実行して結果を報告</pre>
+          </div>
+
+          <div class="explain-box">
+            <p><code class="inline">src/**/*.{ts,tsx}</code> は「srcフォルダ以下の全ての .ts と .tsx ファイル」を意味します。
+            このHookを設定すると、コードを保存するたびにKiroが自動でテストを作成・実行してくれます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">11</div>
+        <div class="step-content">
+          <h4>README自動更新Hookを作成（オプション）</h4>
+
+          <table class="config-table">
+            <tr><th>設定項目</th><td>値</td></tr>
+            <tr><th>Event</th><td>File Saved</td></tr>
+            <tr><th>File path</th><td>src/components/**/*.tsx</td></tr>
+          </table>
+
+          <div class="prompt-box">
+            <h5>📝 Instructions</h5>
+            <pre>コンポーネントが変更されたら：
+1. コンポーネントのPropsを分析
+2. README.mdのコンポーネント一覧を更新
+3. 使用例を追加</pre>
+          </div>
+
+          <div class="alert alert-info">
+            <span class="alert-icon">ℹ️</span>
+            <div>Hooksは自動で実行されるため、頻繁に変更するファイルに設定する場合は注意してください。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 6 -->
+    <section class="section" id="step6">
+      <div class="step-header">
+        Step 6: 動作確認
+        <span class="time-est">⏱ 約5分</span>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">12</div>
+        <div class="step-content">
+          <h4>依存関係をインストール</h4>
+          <p>ターミナルで以下のコマンドを実行します：</p>
+
+          <div class="code-block" data-lang="bash">
+            <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+            <code>npm install</code>
+          </div>
+
+          <div class="explain-box">
+            <p><code class="inline">npm install</code> は、プロジェクトが必要とするライブラリ（React、TypeScriptなど）をダウンロードするコマンドです。
+            初回のみ実行が必要で、完了すると <code class="inline">node_modules</code> フォルダが作成されます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">13</div>
+        <div class="step-content">
+          <h4>開発サーバーを起動</h4>
+
+          <div class="code-block" data-lang="bash">
+            <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+            <code>npm run dev</code>
+          </div>
+
+          <p>ブラウザで <a href="http://localhost:5173" target="_blank"><code class="inline">http://localhost:5173</code></a> を開いて動作確認</p>
+
+          <div class="explain-box">
+            <p><code class="inline">npm run dev</code> は開発用サーバーを起動するコマンドです。
+            コードを変更すると自動でブラウザに反映されます（ホットリロード）。
+            サーバーを停止するには、ターミナルで <code class="inline">Ctrl + C</code> を押します。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">14</div>
+        <div class="step-content">
+          <h4>機能をテスト</h4>
+          <p>以下の操作ができることを確認してください：</p>
+
+          <ul class="checklist" style="margin-top: 12px">
+            <li><input type="checkbox" id="test1"><label for="test1">タスクを追加できる</label></li>
+            <li><input type="checkbox" id="test2"><label for="test2">タスクを完了にできる（チェックボックス）</label></li>
+            <li><input type="checkbox" id="test3"><label for="test3">タスクを削除できる（🗑️ボタン）</label></li>
+            <li><input type="checkbox" id="test4"><label for="test4">ページをリロードしてもデータが残る</label></li>
+          </ul>
+
+          <div class="caution-box">
+            <p>もしアプリが表示されない場合は、ターミナルにエラーメッセージが出ていないか確認してください。
+            よくある原因は <code class="inline">npm install</code> の実行忘れです。</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>📁 最終的なディレクトリ構成</h3>
+      <div class="dir-tree">
+        <pre><span class="folder">todo-app/</span>
+├── <span class="folder">.kiro/</span>                    <span class="comment"># Kiroの設定フォルダ</span>
+│   ├── <span class="folder">specs/</span>                <span class="comment"># 仕様書</span>
+│   │   └── <span class="folder">todo-app/</span>
+│   │       ├── <span class="file">requirements.md</span>  <span class="comment"># 要件定義</span>
+│   │       ├── <span class="file">design.md</span>        <span class="comment"># 技術設計</span>
+│   │       └── <span class="file">tasks.md</span>         <span class="comment"># タスクリスト</span>
+│   ├── <span class="folder">steering/</span>             <span class="comment"># AIへのルール</span>
+│   │   └── <span class="file">product.md</span>       <span class="comment"># プロジェクトルール</span>
+│   └── <span class="folder">hooks/</span>                <span class="comment"># 自動処理</span>
+│       └── <span class="file">auto-test.md</span>     <span class="comment"># 自動テストHook</span>
+├── <span class="folder">src/</span>                      <span class="comment"># ソースコード</span>
+│   ├── <span class="folder">components/</span>           <span class="comment"># UIパーツ</span>
+│   │   ├── <span class="file">TodoItem.tsx</span>
+│   │   ├── <span class="file">TodoList.tsx</span>
+│   │   └── <span class="file">TodoForm.tsx</span>
+│   ├── <span class="folder">hooks/</span>                <span class="comment"># ロジック</span>
+│   │   └── <span class="file">useTodos.ts</span>
+│   ├── <span class="folder">types/</span>                <span class="comment"># 型定義</span>
+│   │   └── <span class="file">todo.ts</span>
+│   ├── <span class="file">App.tsx</span>              <span class="comment"># メイン画面</span>
+│   ├── <span class="file">App.css</span>              <span class="comment"># スタイル</span>
+│   └── <span class="file">main.tsx</span>             <span class="comment"># 起動ファイル</span>
+├── <span class="file">index.html</span>
+├── <span class="file">package.json</span>             <span class="comment"># 依存関係の定義</span>
+├── <span class="file">tsconfig.json</span>            <span class="comment"># TypeScript設定</span>
+└── <span class="file">vite.config.ts</span>           <span class="comment"># Vite設定</span></pre>
+      </div>
+    </section>
+
+    <!-- チェックリスト -->
+    <section class="section" id="checklist">
+      <h2>✅ 完了チェックリスト</h2>
+      <p>ハンズオンが完了したら、以下の項目を確認してください：</p>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+      </div>
+      <p class="progress-text" id="progressText">0 / 10 完了</p>
+
+      <ul class="checklist" id="mainChecklist">
+        <li><input type="checkbox" id="check1" onchange="updateProgress()"><label for="check1">Kiro IDEでプロジェクトを開けた</label></li>
+        <li><input type="checkbox" id="check2" onchange="updateProgress()"><label for="check2">Specsで仕様を作成できた</label></li>
+        <li><input type="checkbox" id="check3" onchange="updateProgress()"><label for="check3">requirements.md が生成された</label></li>
+        <li><input type="checkbox" id="check4" onchange="updateProgress()"><label for="check4">design.md が生成された</label></li>
+        <li><input type="checkbox" id="check5" onchange="updateProgress()"><label for="check5">tasks.md が生成された</label></li>
+        <li><input type="checkbox" id="check6" onchange="updateProgress()"><label for="check6">Steeringを設定できた</label></li>
+        <li><input type="checkbox" id="check7" onchange="updateProgress()"><label for="check7">タスクに従って実装が完了した</label></li>
+        <li><input type="checkbox" id="check8" onchange="updateProgress()"><label for="check8">TODOアプリが動作する</label></li>
+        <li><input type="checkbox" id="check9" onchange="updateProgress()"><label for="check9">ローカルストレージにデータが保存される</label></li>
+        <li><input type="checkbox" id="check10" onchange="updateProgress()"><label for="check10">Hooksの仕組みを理解した</label></li>
+      </ul>
+    </section>
+
+    <!-- トラブルシューティング -->
+    <section class="section" id="trouble">
+      <h2>🔧 困ったときは</h2>
+      <p>うまくいかないときは、以下を確認してみてください。</p>
+
+      <div class="trouble-item">
+        <h5>❌ Specsが生成されない</h5>
+        <p>プロンプトが短すぎるか、具体性が不足している可能性があります。</p>
+        <div class="solution">
+          <strong>解決方法：</strong>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>より具体的な要件を記述する（箇条書きがおすすめ）</li>
+            <li>技術スタック（React、TypeScriptなど）を明示する</li>
+            <li>インターネット接続を確認する</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trouble-item">
+        <h5>❌ npm run dev でエラーが出る</h5>
+        <p>依存関係のインストールが完了していない可能性があります。</p>
+        <div class="solution">
+          <strong>解決方法：</strong>
+          <div class="code-block" data-lang="bash" style="margin-top: 8px">
+            <code>rm -rf node_modules
+npm install</code>
+          </div>
+          <p style="margin-top: 8px; font-size: 0.85rem; color: #64748b;">
+            ↑ node_modulesフォルダを削除して、もう一度インストールし直すコマンドです
+          </p>
+        </div>
+      </div>
+
+      <div class="trouble-item">
+        <h5>❌ TypeScriptエラーが発生する</h5>
+        <p>型定義が不足しているか、インポートパスが間違っている可能性があります。</p>
+        <div class="solution">
+          <strong>解決方法：</strong>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>Chatで「TypeScriptエラーを修正して」と依頼する</li>
+            <li>tsconfig.json の設定を確認する</li>
+            <li>ファイルのインポートパス（相対パス）が正しいか確認する</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trouble-item">
+        <h5>❌ ページをリロードするとデータが消える</h5>
+        <p>ローカルストレージへの保存処理が正しく動いていない可能性があります。</p>
+        <div class="solution">
+          <strong>解決方法：</strong>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>ブラウザの開発者ツール → Application → Local Storage で確認</li>
+            <li>シークレットモードでは保存されない場合があります</li>
+            <li>Chatで「ローカルストレージの保存が動いていません」と相談する</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- まとめ -->
+    <section class="section" id="summary">
+      <h2>📝 まとめ</h2>
+      <p>おつかれさまでした！このハンズオンで学んだKiroの主要機能をおさらいしましょう：</p>
+
+      <table class="prereq-table" style="margin-top: 16px">
+        <tr><th>機能</th><th>役割</th><th>ひとことで言うと</th></tr>
+        <tr><td><strong>Specs</strong></td><td>自然言語から仕様を自動生成</td><td>「設計図を自動で作ってくれる」</td></tr>
+        <tr><td><strong>Steering</strong></td><td>プロジェクトルールをAIに伝達</td><td>「AIへの注意書き」</td></tr>
+        <tr><td><strong>Hooks</strong></td><td>ファイル変更時の自動処理</td><td>「保存したら自動で○○する」</td></tr>
+        <tr><td><strong>Chat</strong></td><td>コンテキストを理解した対話</td><td>「プロジェクトを理解した相談相手」</td></tr>
+      </table>
+
+      <div class="alert alert-info" style="margin-top: 24px">
+        <span class="alert-icon">🎉</span>
+        <div>
+          <strong>おめでとうございます！</strong><br>
+          Kiroの仕様駆動開発の基本をマスターしました。
+          次は自分のアイデアでアプリを作ってみましょう！
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="https://kiro.dev" target="_blank">Kiro公式サイト</a>
+      <a href="https://kiro.dev/docs/" target="_blank">ドキュメント</a>
+      <a href="https://kiro.dev/downloads/" target="_blank">ダウンロード</a>
+    </div>
+    <p>© 2026 Kiro Hands-on Workshop</p>
+    <p style="margin-top: 8px; font-size: 0.8rem">このハンズオン資料はAWS公式のものではありません</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // コードコピー機能
+    function copyCode(button) {
+      const codeBlock = button.parentElement;
+      const code = codeBlock.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const orig = button.innerText;
+        button.innerText = 'コピー完了!';
+        button.style.background = '#22c55e';
+        setTimeout(() => { button.innerText = orig; button.style.background = '#475569'; }, 2000);
+      }).catch(() => {
+        button.innerText = 'エラー';
+        button.style.background = '#ef4444';
+      });
+    }
+
+    // 進捗バー更新
+    function updateProgress() {
+      const cbs = document.querySelectorAll('#mainChecklist input[type="checkbox"]');
+      const total = cbs.length;
+      let checked = 0;
+      cbs.forEach(cb => {
+        const li = cb.parentElement;
+        if (cb.checked) { checked++; li.classList.add('checked'); }
+        else { li.classList.remove('checked'); }
+      });
+      const pct = (checked / total) * 100;
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressText').innerText = checked + ' / ' + total + ' 完了';
+      if (checked === total) confetti();
+      saveChecklistState();
+    }
+
+    // 紙吹雪
+    function confetti() {
+      const colors = ['#3b82f6','#8b5cf6','#22c55e','#f59e0b','#ef4444'];
+      for (let i = 0; i < 50; i++) {
+        const c = document.createElement('div');
+        c.style.cssText = 'position:fixed;width:10px;height:10px;background:' +
+          colors[Math.floor(Math.random()*colors.length)] +
+          ';left:' + Math.random()*100 + 'vw;top:-10px;border-radius:50%;pointer-events:none;z-index:9999;animation:fall ' +
+          (2+Math.random()*2) + 's linear forwards;';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4000);
+      }
+    }
+    const s = document.createElement('style');
+    s.textContent = '@keyframes fall{to{transform:translateY(100vh) rotate(720deg);opacity:0;}}';
+    document.head.appendChild(s);
+
+    // チェックリスト保存・復元
+    function saveChecklistState() {
+      const cbs = document.querySelectorAll('#mainChecklist input[type="checkbox"]');
+      const states = [];
+      cbs.forEach(cb => states.push(cb.checked));
+      localStorage.setItem('kiro-beginner-checklist', JSON.stringify(states));
+    }
+    function loadChecklistState() {
+      const saved = localStorage.getItem('kiro-beginner-checklist');
+      if (saved) {
+        const states = JSON.parse(saved);
+        const cbs = document.querySelectorAll('#mainChecklist input[type="checkbox"]');
+        cbs.forEach((cb, i) => { if (states[i]) cb.checked = true; });
+        updateProgress();
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadChecklistState);
+
+    // スムーズスクロール
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // ナビアクティブ状態
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('.section');
+      const links = document.querySelectorAll('.nav a');
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 100) current = sec.getAttribute('id');
+      });
+      links.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+
+    // トップへ戻るボタン
+    const btn = document.createElement('button');
+    btn.innerHTML = '↑';
+    btn.setAttribute('aria-label', 'トップへ戻る');
+    btn.style.cssText = 'position:fixed;bottom:30px;right:30px;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:white;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 15px rgba(59,130,246,0.4);opacity:0;visibility:hidden;transition:all 0.3s;z-index:1000;';
+    document.body.appendChild(btn);
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) { btn.style.opacity = '1'; btn.style.visibility = 'visible'; }
+      else { btn.style.opacity = '0'; btn.style.visibility = 'hidden'; }
+    });
+  </script>
+</body>
+</html>
