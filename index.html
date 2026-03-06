@@ -323,6 +323,15 @@
         background: #3b82f6;
       }
 
+      /* プロンプト用コードブロック（折り返しあり） */
+      .code-block.prompt-wrap code {
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .code-block.prompt-wrap .copy-btn {
+        right: 12px;
+      }
+
       /* インラインコード */
       .step-content code,
       code.inline {
@@ -1241,7 +1250,7 @@ cd todo-app</code>
           Chatで以下のように指示してください：
         </p>
 
-        <div class="code-block">
+        <div class="code-block prompt-wrap">
           <button class="copy-btn" onclick="copyCode(this)">コピー</button>
           <code>Steeringファイル（product.md、structure.md、tech.md）を日本語に翻訳して、内容を簡潔にまとめてください</code>
         </div>
