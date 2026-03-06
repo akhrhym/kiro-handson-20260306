@@ -328,6 +328,9 @@
         white-space: pre-wrap;
         word-break: break-all;
       }
+      .code-block.prompt-wrap {
+        padding-top: 40px;
+      }
       .code-block.prompt-wrap .copy-btn {
         right: 12px;
       }
@@ -1478,6 +1481,23 @@ renderTodos();</code>
             Reactのような特別なライブラリは使わず、ブラウザ標準の機能だけで実装しています。
             <code class="inline">document.getElementById</code> でHTML要素を取得し、
             <code class="inline">addEventListener</code> でクリックやフォーム送信に反応させています。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">15</div>
+      <div class="step-content">
+        <h4>ブラウザで動作確認</h4>
+        <p>
+          タスクの実行が完了したら、生成された <code class="inline">index.html</code> をブラウザにドラッグ＆ドロップなどで開いて動作を確認しましょう。
+        </p>
+
+        <div class="explain-box">
+          <p>
+            HTMLファイルをブラウザで直接開くだけで動作します。
+            開発サーバーは不要です。タスクの追加・削除・完了切り替えができるか試してみてください。
           </p>
         </div>
       </div>
