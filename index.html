@@ -900,18 +900,18 @@ cd todo-app</code>
       <div class="step-content">
         <h4>Specの作成を開始</h4>
         <p>
-          左サイドバーの <strong>「SPECS」</strong> セクションで
-          <strong>「+」</strong> ボタンをクリック
+          画面右側のチャットパネルに <strong>「Let's build」</strong> 画面が表示されます。
+          <strong>「Spec」</strong> タブを選択してください。
         </p>
         <p>
-          入力欄が表示されます：<br>
-          <code class="inline">Enter your idea to generate requirement, design, and task specs.</code>
+          「Spec」は「Plan first, then build. Create requirements and design before coding starts.」と説明されています。
+          設計してから作る、仕様駆動開発のアプローチです。
         </p>
 
         <div class="explain-box">
           <p>
-            Kiroの画面左側にあるサイドバーを見てください。「SPECS」という項目があります。その横の「+」ボタンを押すと、新しい仕様書の作成が始まります。
-            右側のサイドバー（Kiroパネル）からも同様にSpecを作成できます。
+            「Vibe」タブはチャットしながら自由に開発するモード、「Spec」タブは仕様を先に作ってから開発するモードです。
+            今回は「Spec」を選びます。左サイドバーの「SPECS」セクションの「+ Create New Spec」ボタンからも同様に作成できます。
           </p>
         </div>
       </div>
@@ -921,23 +921,29 @@ cd todo-app</code>
       <div class="step-number">4</div>
       <div class="step-content">
         <h4>プロンプトを入力</h4>
-        <p>以下のテキストをそのままコピーして貼り付けてください：</p>
+        <p>チャット入力欄に以下のテキストをコピーして貼り付け、送信してください：</p>
 
-        <div class="prompt-box">
-          <h5>📝 入力するプロンプト</h5>
-          <pre>
-シンプルなTODOアプリを作成したい。
+        <div class="code-block" data-lang="prompt">
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+          <code>シンプルなTODOアプリを作成したい。
 - タスクの追加・削除・完了切り替えができる
 - HTML + CSS + JavaScript のみで実装（フレームワーク不要）
 - ローカルストレージでデータ永続化
 - index.html 1ファイルに HTML・CSS・JS をまとめる
-- シンプルでモダンなUI</pre
-          >
+- シンプルでモダンなUI</code>
         </div>
 
         <div class="caution-box">
           <p>
             プロンプトが短すぎると、Kiroが意図を正しく理解できないことがあります。上記のように箇条書きで具体的に書くのがコツです。
+          </p>
+        </div>
+
+        <div class="explain-box">
+          <p>
+            Kiroがファイル操作やコマンドを実行する際、<strong>「Waiting on your input」</strong>と表示されることがあります。
+            これはKiroがあなたの許可を待っている状態です。内容を確認して <strong>「Run」</strong> または <strong>「Trust」</strong> をクリックしてください。
+            不要な操作の場合は「Reject」で拒否できます。
           </p>
         </div>
       </div>
@@ -993,7 +999,7 @@ cd todo-app</code>
         <h4>要件定義（requirements.md）を確認・承認</h4>
         <p>
           Kiroがまず <strong>requirements.md</strong>（要件定義）を生成します。
-          内容を確認し、問題なければチャットで「looks good」や「続けてください」と伝えてください。
+          内容を確認し、問題なければチャットの <strong>「Move to design phase」</strong> ボタンをクリックしてください。
         </p>
 
         <div class="file-desc">
@@ -1014,6 +1020,7 @@ cd todo-app</code>
           <span class="alert-icon">💡</span>
           <div>
             修正したい場合はチャットで「〇〇を追加して」「〇〇は不要」などと指示できます。
+            テキスト入力フォームに何も入力せずにそのまま進むと、現在の内容で承認されます。
             納得できたら次に進みましょう。
           </div>
         </div>
@@ -1080,7 +1087,7 @@ cd todo-app</code>
           </div>
         </div>
       </div>
-    </div>""
+    </div>
   </section>
 
   <!-- Step 3 -->
