@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kiro ハンズオン手順書（初心者向け）- HTML+CSS+JSで作るTODOアプリ</title>
+    <title>Kiro ハンズオン手順書 - HTML+CSS+JSで作るTODOアプリ</title>
     <style>
       * {
         margin: 0;
@@ -658,7 +658,7 @@
 <!-- ヘッダー -->
 <header class="header">
   <h1>🚀 Kiro ハンズオン手順書</h1>
-  <p class="subtitle">仕様駆動開発によるTODOアプリ構築ハンズオン（Node.js不要版）</p>
+  <p class="subtitle">仕様駆動開発によるTODOアプリ構築ハンズオン</p>
   <p class="date">2026年3月6日</p>
 </header>
 
@@ -689,7 +689,7 @@
       IDEの4つの主要機能を使って、実際にTODOアプリを作ります。<br />
       所要時間は
       <strong>30〜45分</strong> です。プログラミング経験がなくても大丈夫です。<br />
-      Node.jsのインストールは不要で、ブラウザだけで動くアプリを作ります。
+      ブラウザだけで動くアプリを作ります。
     </p>
 
     <div class="goal-grid">
@@ -734,7 +734,7 @@
           コードを書く・実行する・デバッグするなど、開発に必要な機能がまとまったアプリケーションのこと。Kiroはこの一種です。
         </p>
         <div class="analogy">
-          🏠 たとえるなら：料理に必要な道具が全部揃ったキッチン
+          🏠 たとえるなら：家を建てるための工具や材料が全部揃った作業場
         </div>
       </div>
       <div class="glossary-item">
@@ -750,7 +750,7 @@
           AIに対して「このプロジェクトではこういうルールで書いてね」と伝える設定ファイル。
         </p>
         <div class="analogy">
-          🧭 たとえるなら：料理のレシピに書かれた「塩は控えめに」などの注意書き
+          🧭 たとえるなら：家を建てるときの「窓は二重ガラスにする」「壁は白で統一」などの施工ルール
         </div>
       </div>
       <div class="glossary-item">
@@ -759,7 +759,7 @@
           特定のイベント（ファイル保存など）が起きたときに、自動で処理を実行する仕組み。
         </p>
         <div class="analogy">
-          🔔 たとえるなら：ドアが開いたら自動で電気がつく仕組み
+          🔔 たとえるなら：家のドアが開いたら自動で電気がつくセンサーの仕組み
         </div>
       </div>
       <div class="glossary-item">
@@ -778,7 +778,7 @@
           ブラウザにデータを保存する仕組み。ページをリロードしてもデータが消えません。
         </p>
         <div class="analogy">
-          🗄️ たとえるなら：ブラウザの中にある小さな引き出し
+          🗄️ たとえるなら：家の中にある小さな収納棚。しまったものは次に来たときもそのまま残っている
         </div>
       </div>
     </div>
@@ -819,7 +819,6 @@
 
     <div class="explain-box">
       <p>
-        この版ではNode.jsのインストールは不要です。
         HTML・CSS・JavaScriptだけで動くので、ブラウザさえあればOKです。
         ファイルをダブルクリックするだけでアプリが開きます。
       </p>
@@ -904,10 +903,15 @@ cd todo-app</code>
           左サイドバーの <strong>「SPECS」</strong> セクションで
           <strong>「+」</strong> ボタンをクリック
         </p>
+        <p>
+          入力欄が表示されます：<br>
+          <code class="inline">Enter your idea to generate requirement, design, and task specs.</code>
+        </p>
 
         <div class="explain-box">
           <p>
             Kiroの画面左側にあるサイドバーを見てください。「SPECS」という項目があります。その横の「+」ボタンを押すと、新しい仕様書の作成が始まります。
+            右側のサイドバー（Kiroパネル）からも同様にSpecを作成できます。
           </p>
         </div>
       </div>
@@ -942,9 +946,54 @@ cd todo-app</code>
     <div class="step-item">
       <div class="step-number">5</div>
       <div class="step-content">
-        <h4>自動生成されるファイルを確認</h4>
+        <h4>Specの種類を選択</h4>
         <p>
-          Kiroが以下の3つのファイルを自動で生成します。それぞれの役割を理解しましょう：
+          プロンプトを送信すると、Kiroが「これは新機能の開発ですか？それともバグ修正ですか？」と聞いてきます。
+        </p>
+        <p>
+          今回は新しいアプリを作るので、<strong>「Build a Feature」</strong>（Recommended）を選択してください。
+        </p>
+
+        <div class="explain-box">
+          <p>
+            Kiroは「新機能の開発」と「バグ修正」で異なるワークフローを用意しています。
+            新機能の場合は要件定義→設計→タスクの流れ、バグ修正の場合はバグの原因調査から始まります。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <h4>ワークフローを選択</h4>
+        <p>
+          次に「何から始めますか？」と聞かれます。以下の2つから選べます：
+        </p>
+        <ul style="margin: 12px 0 12px 20px">
+          <li><strong>Requirements</strong>（推奨）— 要件定義から始める</li>
+          <li><strong>Technical Design</strong> — 技術設計から始める</li>
+        </ul>
+        <p>
+          今回は <strong>「Requirements」</strong>（Recommended）を選択してください。
+        </p>
+
+        <div class="explain-box">
+          <p>
+            「何を作るか」を先に決めてから「どう作るか」を設計する流れが一般的です。
+            技術的なアプローチが先に決まっている場合は「Technical Design」を選ぶこともできます。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">7</div>
+      <div class="step-content">
+        <h4>要件定義（requirements.md）を確認・承認</h4>
+        <p>
+          Kiroがまず <strong>requirements.md</strong>（要件定義）を生成します。
+          内容を確認し、問題なければチャットで「looks good」や「続けてください」と伝えてください。
         </p>
 
         <div class="file-desc">
@@ -959,6 +1008,28 @@ cd todo-app</code>
               </p>
             </div>
           </div>
+        </div>
+
+        <div class="alert alert-tip">
+          <span class="alert-icon">💡</span>
+          <div>
+            修正したい場合はチャットで「〇〇を追加して」「〇〇は不要」などと指示できます。
+            納得できたら次に進みましょう。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">8</div>
+      <div class="step-content">
+        <h4>技術設計（design.md）を確認・承認</h4>
+        <p>
+          要件定義を承認すると、次に <strong>design.md</strong>（技術設計）が生成されます。
+          同様に内容を確認し、問題なければ承認してください。
+        </p>
+
+        <div class="file-desc">
           <div class="file-item">
             <span class="file-icon">🏗️</span>
             <div class="file-info">
@@ -969,6 +1040,26 @@ cd todo-app</code>
               </p>
             </div>
           </div>
+        </div>
+
+        <div class="explain-box">
+          <p>
+            設計ドキュメントの生成には少し時間がかかることがあります。
+            「Working...」と表示されている間はKiroが作業中です。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">9</div>
+      <div class="step-content">
+        <h4>タスクリスト（tasks.md）を確認</h4>
+        <p>
+          設計を承認すると、最後に <strong>tasks.md</strong>（タスクリスト）が生成されます。
+        </p>
+
+        <div class="file-desc">
           <div class="file-item">
             <span class="file-icon">✅</span>
             <div class="file-info">
@@ -984,13 +1075,12 @@ cd todo-app</code>
         <div class="alert alert-tip">
           <span class="alert-icon">💡</span>
           <div>
-            各ファイルの内容を確認し、問題なければ
-            <strong>「Approve」</strong>
-            ボタンで承認してください。修正したい場合はチャットで指示できます。
+            Specの作成は段階的に進みます。各ドキュメントの内容を確認してから次に進むので、
+            途中で方向修正がしやすいのがポイントです。
           </div>
         </div>
       </div>
-    </div>
+    </div>""
   </section>
 
   <!-- Step 3 -->
@@ -1003,25 +1093,40 @@ cd todo-app</code>
     <div class="why-box">
       <p>
         AIは万能ですが、プロジェクトごとの「お約束」は知りません。
-        たとえば「HTMLファイル1つにまとめる」「日本語でコメントを書く」「varは使わない」といったルールを
+        たとえば「HTMLファイル1つにまとめる」「日本語でコメントを書く」といったルールを
         <strong>Steering</strong> で伝えることで、
         AIが生成するコードの品質が格段に上がります。
       </p>
     </div>
 
     <div class="step-item">
-      <div class="step-number">6</div>
+      <div class="step-number">12</div>
       <div class="step-content">
         <h4>Steeringファイルを作成</h4>
         <p>
-          左サイドバーの <strong>「AGENT STEERING」</strong> セクションで
+          左サイドバーで <strong>Kiroアイコン</strong> をクリックし、<strong>「AGENT STEERING」</strong> セクションの
           <strong>「+」</strong> ボタンをクリック
         </p>
+        <p>
+          選択肢が表示されます：<br>
+          <code class="inline">Create Steering or Import Skills - Select a method</code>
+        </p>
+        <p>
+          今回は <strong>「Project steering files」</strong>（Automatically create project steering files that help establish core workspace context）を選択してください。
+        </p>
+
+        <div class="explain-box">
+          <p>
+            左サイドバーにあるKiroのアイコン（丸い顔のマーク）をクリックすると、Kiroの機能パネルが表示されます。
+            その中に「AGENT STEERING」セクションがあります。
+            「Project steering files」を選ぶと、Kiroがプロジェクトを分析して自動でSteeringファイルを生成してくれます。
+          </p>
+        </div>
       </div>
     </div>
 
     <div class="step-item">
-      <div class="step-number">7</div>
+      <div class="step-number">13</div>
       <div class="step-content">
         <h4>プロジェクトルールを記述</h4>
         <p>
@@ -1054,10 +1159,18 @@ cd todo-app</code>
         <div class="explain-box">
           <p>
             この設定により、Kiroは今後このプロジェクトでコードを生成するとき、上記のルールに従います。
-            たとえば
-            <code class="inline">var</code>
-            を使わない、外部ライブラリを使わない、といったことを自動で守ってくれます。
+            たとえば「1ファイルにまとめる」「日本語コメントで書く」といったことを自動で守ってくれます。
           </p>
+        </div>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ️</span>
+          <div>
+            Kiroは <code class="inline">product.md</code> の他にも、プロジェクトのフォルダ構成を記述する <code class="inline">structure.md</code> や
+            使用する技術スタックを定義する <code class="inline">tech.md</code> を自動生成することがあります。
+            これはKiroがプロジェクト全体を理解し、一貫性のあるコードを生成するためです。
+            それぞれの内容も確認してみましょう。
+          </div>
         </div>
       </div>
     </div>
@@ -1081,7 +1194,7 @@ cd todo-app</code>
     </div>
 
     <div class="step-item">
-      <div class="step-number">8</div>
+      <div class="step-number">10</div>
       <div class="step-content">
         <h4>タスクリストを開いて実行</h4>
         <p>生成された <code>tasks.md</code> を開き、Chatで以下を指示：</p>
@@ -1105,7 +1218,7 @@ cd todo-app</code>
     </div>
 
     <div class="step-item">
-      <div class="step-number">9</div>
+      <div class="step-number">11</div>
       <div class="step-content">
         <h4>生成されるコードを確認</h4>
         <p>
@@ -1364,7 +1477,7 @@ renderTodos();</code>
           <p>方法2: ブラウザにドラッグ＆ドロップ</p>
 
           <div class="explain-box">
-            <p>Node.jsやnpmは不要です。HTMLファイルをブラウザで直接開くだけで動作します。
+            <p>HTMLファイルをブラウザで直接開くだけで動作します。
             これがHTML+CSS+JavaScriptだけで作るメリットです。</p>
           </div>
         </div>
