@@ -1527,14 +1527,14 @@ renderTodos();</code>
             <tr><th>設定項目</th><td>設定値</td></tr>
             <tr><th>Title</th><td>コードレビューHook</td></tr>
             <tr><th>Description</th><td>HTMLファイル保存時にコードをレビューして改善点を提案する</td></tr>
-            <tr><th>Event</th><td>Manual Trigger</td></tr>
+            <tr><th>Event</th><td>File Saved</td></tr>
+            <tr><th>File path(s) to watch</th><td>*.html</td></tr>
             <tr><th>Action</th><td>Ask Kiro</td></tr>
           </table>
 
           <div class="prompt-box">
             <h5>📝 Instructions for Kiro agent</h5>
-            <pre>HTMLファイルが保存されたら：
-1. 変更内容を分析
+            <pre>1. 変更内容を分析
 2. コードの改善点があれば提案
 3. 問題があれば警告</pre>
           </div>
