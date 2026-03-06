@@ -893,7 +893,9 @@ cd todo-app</code>
           <p>
             <code class="inline">mkdir</code>
             は「フォルダを作る」コマンド、<code class="inline">cd</code>
-            は「そのフォルダに移動する」コマンドです。 作成したフォルダをKiroの
+            は「そのフォルダに移動する」コマンドです。
+            macOSではターミナル、Windowsではコマンドプロンプトまたは PowerShell で実行できます。
+            作成したフォルダをKiroの
             <strong>File → Open Folder</strong> で開いてください。
           </p>
         </div>
@@ -1568,7 +1570,7 @@ renderTodos();</code>
         <div class="step-content">
           <h4>コードを変更して確認</h4>
 
-          <p>Kiroでコードを編集したら、ブラウザで <code class="inline">index.html</code> をリロード（F5 または Ctrl+R）して変更を確認します。</p>
+          <p>Kiroでコードを編集したら、ブラウザで <code class="inline">index.html</code> をリロード（Windowsは <code class="inline">F5</code> または <code class="inline">Ctrl+R</code>、macOSは <code class="inline">Cmd+R</code>）して変更を確認します。</p>
 
           <div class="explain-box">
             <p>開発サーバーは不要です。ファイルを保存してブラウザをリロードするだけで変更が反映されます。
@@ -1591,7 +1593,7 @@ renderTodos();</code>
           </ul>
 
           <div class="caution-box">
-            <p>もしアプリが表示されない場合は、ブラウザの開発者ツール（F12）でコンソールにエラーが出ていないか確認してください。
+            <p>もしアプリが表示されない場合は、ブラウザの開発者ツール（Windowsは <code class="inline"></code>F12</code>、macOSは <code class="inline">Cmd+Option+I</code>）でコンソールにエラーが出ていないか確認してください。
             よくある原因はHTMLの閉じタグの不足やJavaScriptの構文エラーです。</p>
           </div>
         </div>
@@ -1664,7 +1666,7 @@ renderTodos();</code>
         <div class="solution">
           <strong>解決方法：</strong>
           <ul style="margin-left: 20px; margin-top: 8px">
-            <li>ブラウザの開発者ツール（F12）→ Console タブでエラーを確認</li>
+            <li>ブラウザの開発者ツール（Windowsは <code class="inline">F12</code>、macOSは <code class="inline">Cmd+Option+I</code>）→ Console タブでエラーを確認</li>
             <li>HTMLの閉じタグが正しいか確認する</li>
             <li>Chatで「HTMLのエラーを修正して」と依頼する</li>
           </ul>
@@ -1677,7 +1679,7 @@ renderTodos();</code>
         <div class="solution">
           <strong>解決方法：</strong>
           <ul style="margin-left: 20px; margin-top: 8px">
-            <li>ブラウザの開発者ツール（F12）→ Console タブでエラーメッセージを確認</li>
+            <li>ブラウザの開発者ツール（Windowsは <code class="inline"></code>F12</code>、macOSは <code class="inline">Cmd+Option+I</code>）→ Console タブでエラーメッセージを確認</li>
             <li>Chatで「JavaScriptのエラーを修正して」と依頼する</li>
             <li>scriptタグがbodyの閉じタグの直前にあるか確認する</li>
           </ul>
@@ -1690,7 +1692,7 @@ renderTodos();</code>
         <div class="solution">
           <strong>解決方法：</strong>
           <ul style="margin-left: 20px; margin-top: 8px">
-            <li>ブラウザの開発者ツール → Application → Local Storage で確認</li>
+            <li>ブラウザの開発者ツール（Windowsは <code class="inline">F12</code>、macOSは <code class="inline">Cmd+Option+I</code>）→ Application → Local Storage で確認</li>
             <li>シークレットモードでは保存されない場合があります</li>
             <li>Chatで「ローカルストレージの保存が動いていません」と相談する</li>
           </ul>
