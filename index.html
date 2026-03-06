@@ -954,10 +954,10 @@ cd todo-app</code>
       <div class="step-content">
         <h4>Specの種類を選択</h4>
         <p>
-          プロンプトを送信すると、Kiroが「これは新機能の開発ですか？それともバグ修正ですか？」と聞いてきます。
+          プロンプトを送信すると、Kiroが「これは新しい機能の開発ですか？それとも既存のバグ修正ですか？」と聞いてきます。
         </p>
         <p>
-          今回は新しいアプリを作るので、<strong>「Build a Feature」</strong>（Recommended）を選択してください。
+          今回は新しいアプリを作るので、<strong>「Build a Feature」</strong>（Recommended）を選択し、<strong>「Submit answer」</strong> をクリックしてください。
         </p>
 
         <div class="explain-box">
@@ -981,7 +981,7 @@ cd todo-app</code>
           <li><strong>Technical Design</strong> — 技術設計から始める</li>
         </ul>
         <p>
-          今回は <strong>「Requirements」</strong>（Recommended）を選択してください。
+          今回は <strong>「Requirements」</strong>（Recommended）を選択し、<strong>「Submit answer」</strong> をクリックしてください。
         </p>
 
         <div class="explain-box">
@@ -999,10 +999,21 @@ cd todo-app</code>
         <h4>要件定義（requirements.md）を確認・承認</h4>
         <p>
           Kiroがまず <strong>requirements.md</strong>（要件定義）を生成します。
-          内容を確認し、問題なければチャットの <strong>「Move to design phase」</strong> ボタンをクリックしてください。
+          画面上部に <strong>「1 Requirements > 2 Design > 3 Task list」</strong> というステップ表示が出ます。
+          内容を確認し、問題なければ右上の <strong>「→ Continue」</strong> ボタンをクリックしてください。
         </p>
 
         <div class="file-desc">
+          <div class="file-item">
+            <span class="file-icon">⚙️</span>
+            <div class="file-info">
+              <h5>.config.kiro（設定ファイル）</h5>
+              <p>Specのワークフロー種類などを記録する内部設定ファイル</p>
+              <p class="beginner-note">
+                → 自動生成されるので、特に編集する必要はありません
+              </p>
+            </div>
+          </div>
           <div class="file-item">
             <span class="file-icon">📋</span>
             <div class="file-info">
@@ -1021,8 +1032,16 @@ cd todo-app</code>
           <div>
             修正したい場合はチャットで「〇〇を追加して」「〇〇は不要」などと指示できます。
             テキスト入力フォームに何も入力せずにそのまま進むと、現在の内容で承認されます。
-            納得できたら次に進みましょう。
+            納得できたら「→ Continue」で次に進みましょう。
           </div>
+        </div>
+
+        <div class="explain-box">
+          <p>
+            requirements.mdが生成されると、画面上部のステップ表示で「1 Requirements」がハイライトされます。
+            内容には「はじめに」「用語集」「要件」などのセクションが含まれ、ユーザーストーリーや受入基準が自動で整理されています。
+            AIが生成する内容はプロンプトの書き方や実行タイミングによって異なる場合があります。
+          </p>
         </div>
       </div>
     </div>
