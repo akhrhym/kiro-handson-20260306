@@ -825,6 +825,15 @@
     </div>
   </section>
 
+  <!-- 言語に関する注意 -->
+  <div class="alert alert-info" style="margin: 0 0 28px 0">
+    <span class="alert-icon">🌐</span>
+    <div>
+      Kiroが英語で返答することがありますが、日本語で問い合わせて問題ありません。
+      「日本語で回答して」「ファイルを日本語に翻訳して」と伝えれば対応してくれます。
+    </div>
+  </div>
+
   <!-- Step 1 -->
   <section class="section" id="step1">
     <div class="step-header">
@@ -988,6 +997,7 @@ cd todo-app</code>
           <p>
             「何を作るか」を先に決めてから「どう作るか」を設計する流れが一般的です。
             技術的なアプローチが先に決まっている場合は「Technical Design」を選ぶこともできます。
+            この選択肢が表示されず、直接Requirementsの生成が始まる場合もあります。
           </p>
         </div>
       </div>
@@ -1134,7 +1144,7 @@ cd todo-app</code>
     </div>
 
     <div class="step-item">
-      <div class="step-number">12</div>
+      <div class="step-number">10</div>
       <div class="step-content">
         <h4>Steeringファイルを作成</h4>
         <p>
@@ -1160,50 +1170,60 @@ cd todo-app</code>
     </div>
 
     <div class="step-item">
-      <div class="step-number">13</div>
+      <div class="step-number">11</div>
       <div class="step-content">
-        <h4>プロジェクトルールを記述</h4>
+        <h4>自動生成されるSteeringファイルを確認</h4>
         <p>
-          <code>product.md</code>
-          を選択し、以下の内容をコピーして貼り付けてください：
+          「Project steering files」を選択すると、Kiroがプロジェクトの構成やSpecの内容を分析し、
+          以下の3つのSteeringファイルを自動で生成します：
         </p>
 
-        <div class="code-block" data-lang="markdown">
-          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-          <code># TODOアプリ プロジェクトガイドライン
-
-## 技術スタック
-- HTML5
-- CSS3
-- JavaScript（ES6+）
-- フレームワーク・ライブラリ不要
-
-## コーディング規約
-- index.html に HTML・CSS・JS をまとめる
-- const / let を使用（var 禁止）
-- 日本語コメントを推奨
-- セマンティックなHTML要素を使用
-
-## 禁止事項
-- var の使用禁止
-- 外部ライブラリの使用禁止
-- インラインスタイル禁止（style要素にまとめる）</code>
+        <div class="file-desc">
+          <div class="file-item">
+            <span class="file-icon">📄</span>
+            <div class="file-info">
+              <h5>product.md（プロダクト概要）</h5>
+              <p>プロジェクトの概要やコーディング規約を記述</p>
+              <p class="beginner-note">
+                → 「HTMLファイル1つにまとめる」「日本語コメント推奨」などのルール
+              </p>
+            </div>
+          </div>
+          <div class="file-item">
+            <span class="file-icon">📁</span>
+            <div class="file-info">
+              <h5>structure.md（プロジェクト構成）</h5>
+              <p>フォルダ構成やファイルの役割を記述</p>
+              <p class="beginner-note">
+                → どのファイルがどこにあるかをKiroに伝える
+              </p>
+            </div>
+          </div>
+          <div class="file-item">
+            <span class="file-icon">⚙️</span>
+            <div class="file-info">
+              <h5>tech.md（技術スタック）</h5>
+              <p>使用する技術や制約を記述</p>
+              <p class="beginner-note">
+                → 「HTML5 + CSS3 + JavaScript」「フレームワーク不要」などの技術情報
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="explain-box">
           <p>
-            この設定により、Kiroは今後このプロジェクトでコードを生成するとき、上記のルールに従います。
-            たとえば「1ファイルにまとめる」「日本語コメントで書く」といったことを自動で守ってくれます。
+            KiroがプロジェクトのファイルやSpecの内容を読み取り、自動でルールを生成してくれます。
+            生成された内容を確認し、必要に応じて編集してください。
+            これにより、以降のコード生成でKiroがプロジェクトのルールに従ってくれます。
           </p>
         </div>
 
         <div class="alert alert-info">
           <span class="alert-icon">ℹ️</span>
           <div>
-            Kiroは <code class="inline">product.md</code> の他にも、プロジェクトのフォルダ構成を記述する <code class="inline">structure.md</code> や
-            使用する技術スタックを定義する <code class="inline">tech.md</code> を自動生成することがあります。
-            これはKiroがプロジェクト全体を理解し、一貫性のあるコードを生成するためです。
-            それぞれの内容も確認してみましょう。
+            生成されるファイルの内容はプロジェクトの状態によって異なります。
+            AIが生成する内容は実行タイミングによって変わる場合があります。
           </div>
         </div>
       </div>
@@ -1228,7 +1248,7 @@ cd todo-app</code>
     </div>
 
     <div class="step-item">
-      <div class="step-number">10</div>
+      <div class="step-number">12</div>
       <div class="step-content">
         <h4>タスクリストを開いて実行</h4>
         <p>生成された <code>tasks.md</code> を開き、Chatで以下を指示：</p>
@@ -1252,7 +1272,7 @@ cd todo-app</code>
     </div>
 
     <div class="step-item">
-      <div class="step-number">11</div>
+      <div class="step-number">13</div>
       <div class="step-content">
         <h4>生成されるコードを確認</h4>
         <p>
@@ -1561,7 +1581,9 @@ renderTodos();</code>
 │   │       ├── <span class="file">design.md</span>        <span class="comment"># 技術設計</span>
 │   │       └── <span class="file">tasks.md</span>         <span class="comment"># タスクリスト</span>
 │   ├── <span class="folder">steering/</span>             <span class="comment"># AIへのルール</span>
-│   │   └── <span class="file">product.md</span>       <span class="comment"># プロジェクトルール</span>
+│   │   ├── <span class="file">product.md</span>       <span class="comment"># プロダクト概要</span>
+│   │   ├── <span class="file">structure.md</span>     <span class="comment"># プロジェクト構成</span>
+│   │   └── <span class="file">tech.md</span>          <span class="comment"># 技術スタック</span>
 │   └── <span class="folder">hooks/</span>                <span class="comment"># 自動処理</span>
 │       └── <span class="file">auto-test.md</span>     <span class="comment"># 自動テストHook</span>
 └── <span class="file">index.html</span>               <span class="comment"># アプリ本体（HTML+CSS+JS）</span></pre>
