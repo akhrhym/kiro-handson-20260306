@@ -1520,52 +1520,26 @@ renderTodos();</code>
       <div class="step-item">
         <div class="step-number">10</div>
         <div class="step-content">
-          <h4>自動テスト生成Hookを作成</h4>
+          <h4>コードレビューHookを作成</h4>
           <p>左サイドバーの <strong>「AGENT HOOKS」</strong> セクションで <strong>「+」</strong> ボタンをクリック</p>
 
           <table class="config-table">
             <tr><th>設定項目</th><td>値</td></tr>
             <tr><th>Event</th><td>File Saved</td></tr>
-            <tr><th>File path</th><td>*.html, *.js, *.css</td></tr>
+            <tr><th>File path</th><td>*.html</td></tr>
           </table>
 
           <div class="prompt-box">
             <h5>📝 Instructions</h5>
-            <pre>ファイルが保存されたら：
+            <pre>HTMLファイルが保存されたら：
 1. 変更内容を分析
-2. 対応するテストファイルを作成・更新
-3. テストを実行して結果を報告</pre>
+2. コードの改善点があれば提案
+3. 問題があれば警告</pre>
           </div>
 
           <div class="explain-box">
-            <p><code class="inline">*.html, *.js, *.css</code> は「プロジェクト内の全ての HTML・JS・CSS ファイル」を意味します。
-            このHookを設定すると、コードを保存するたびにKiroが自動でテストを作成・実行してくれます。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="step-item">
-        <div class="step-number">11</div>
-        <div class="step-content">
-          <h4>README自動更新Hookを作成（オプション）</h4>
-
-          <table class="config-table">
-            <tr><th>設定項目</th><td>値</td></tr>
-            <tr><th>Event</th><td>File Saved</td></tr>
-            <tr><th>File path</th><td>index.html</td></tr>
-          </table>
-
-          <div class="prompt-box">
-            <h5>📝 Instructions</h5>
-            <pre>HTMLファイルが変更されたら：
-1. 変更内容を分析
-2. README.mdの機能一覧を更新
-3. 使い方の説明を追加</pre>
-          </div>
-
-          <div class="alert alert-info">
-            <span class="alert-icon">ℹ️</span>
-            <div>Hooksは自動で実行されるため、頻繁に変更するファイルに設定する場合は注意してください。</div>
+            <p>このHookを設定すると、HTMLファイルを保存するたびにKiroが自動でコードをレビューしてくれます。
+            改善点や問題点があればチャットで教えてくれるので、コードの品質向上に役立ちます。</p>
           </div>
         </div>
       </div>
